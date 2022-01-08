@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import firebase from '../../config/firebase'
+import { registerUser } from '../../services/userService'
 import './SignUpPage.scss'
 
 const SignUpPage = () => {
@@ -9,17 +10,7 @@ const SignUpPage = () => {
 
     const onSubmitHandler = (e) => {
         e.preventDefault()
-        firebase
-            .createUserWithEmailAndPassword(
-                email,
-                password
-            )
-            .then((userCredential) => {
-                console.log(userCredential)
-            })
-            .catch((error) => {
-                console.log(error)
-            })
+        registerUser(email, password)
     }
 
     return (
@@ -45,9 +36,15 @@ const SignUpPage = () => {
                 onSubmit={onSubmitHandler}
             >
                 <h3>Join us now!</h3>
-                <input type='text' onChange={(e) => setEmail(e.target.value)}/>
-                <input type='password' onChange={(e) => setPassword(e.target.value)}/>
-                <input type='password' onChange={(e) => setRepeatPassword(e.target.value)}/>
+                <input type='text' onChange={(e) => setEmail(e.target.value)} />
+                <input
+                    type='password'
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                <input
+                    type='password'
+                    onChange={(e) => setRepeatPassword(e.target.value)}
+                />
                 <input className='sign-button' type='submit' />
             </form>
         </div>
