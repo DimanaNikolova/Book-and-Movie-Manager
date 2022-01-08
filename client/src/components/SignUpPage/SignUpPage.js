@@ -11,20 +11,14 @@ const SignUpPage = () => {
         e.preventDefault()
         firebase
             .createUserWithEmailAndPassword(
-                'firstuser@mailinator.com',
-                'dimana'
+                email,
+                password
             )
             .then((userCredential) => {
-                // Signed in
-                const user = userCredential.user
                 console.log(userCredential)
-                // ...
             })
             .catch((error) => {
-                const errorCode = error.code
-                const errorMessage = error.message
                 console.log(error)
-                // ..
             })
     }
 
@@ -51,9 +45,9 @@ const SignUpPage = () => {
                 onSubmit={onSubmitHandler}
             >
                 <h3>Join us now!</h3>
-                <input type='text' />
-                <input type='password' />
-                <input type='password' />
+                <input type='text' onChange={(e) => setEmail(e.target.value)}/>
+                <input type='password' onChange={(e) => setPassword(e.target.value)}/>
+                <input type='password' onChange={(e) => setRepeatPassword(e.target.value)}/>
                 <input className='sign-button' type='submit' />
             </form>
         </div>
