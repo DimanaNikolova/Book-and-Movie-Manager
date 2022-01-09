@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import firebase from '../../../config/firebase'
 import { useState, useContext } from 'react'
-import {AuthContext} from '../../../contexts/AuthContext'
+import { AuthContext } from '../../../contexts/AuthContext'
 import './Header.scss'
 
 const NavBar = () => {
@@ -10,12 +10,25 @@ const NavBar = () => {
 
     return (
         <nav className='main-navbar frow'>
-            <span>NASAPP</span>
+            <Link to='/'>
+                MANAGER
+            </Link>
             <span className='navbar-buttons frow'>
                 {auth ? (
-                    <Link to='/' className='sign-button' onClick={()=>{firebase.signOut()}}>
-                        Sign Out
-                    </Link>
+                    <>
+                        <Link to='/movie-catalog' className='sign-button'>
+                            Movies
+                        </Link>
+                        <Link
+                            to='/'
+                            className='sign-button'
+                            onClick={() => {
+                                firebase.signOut()
+                            }}
+                        >
+                            Sign Out
+                        </Link>
+                    </>
                 ) : (
                     <>
                         <Link to='/sign-in' className='sign-button'>

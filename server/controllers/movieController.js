@@ -7,7 +7,7 @@ const mongoose = require('mongoose')
 const getAllMovies = async (req, res, next) => {
     try {
         const allMovies = await Movie.find()
-        res.status(203).json(allMovies)
+        res.status(200).json(allMovies)
     } catch (err) {
         next(errorBuilder(err).badRequest(err.message))
     }
