@@ -5,12 +5,16 @@ import './SignUpPage.scss'
 
 const SignUpPage = () => {
     const [email, setEmail] = useState('')
+    const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [repeatPassword, setRepeatPassword] = useState('')
 
     const onSubmitHandler = (e) => {
         e.preventDefault()
-        registerUser(email, password)
+        registerUser(email, password, username).then(res=>{
+            // todo redirect
+            console.log('it is a promise')
+        })
     }
 
     return (
@@ -36,7 +40,8 @@ const SignUpPage = () => {
                 onSubmit={onSubmitHandler}
             >
                 <h3>Join us now!</h3>
-                <input type='text' onChange={(e) => setEmail(e.target.value)} />
+                <input type='text' onChange={(e) => setEmail(e.target.value)} placeholder='Email'/>
+                <input type='text' onChange={(e) => setUsername(e.target.value)} placeholder='Username'/>
                 <input
                     type='password'
                     onChange={(e) => setPassword(e.target.value)}

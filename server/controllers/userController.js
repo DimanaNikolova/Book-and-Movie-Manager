@@ -5,12 +5,12 @@ const User = require('../model/User')
 const mongoose = require('mongoose')
 
 const registerUser = async (req, res, next) => {
-    let { email } = req.body
+    let { email, username } = req.body
 
     email = email.toLowerCase()
 
     try {
-        const newUser = await User.create({ email })
+        const newUser = await User.create({ email, username })
 
         return res.status(201).json({ user: newUser })
     } catch (err) {

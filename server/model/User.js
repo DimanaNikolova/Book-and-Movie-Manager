@@ -5,12 +5,10 @@ const userSchema = new mongoose.Schema({
 
     email: {
         type: String,
-        // required: [true, 'Error - missing email!']
     },
 
     username: {
         type: String,
-        // required: [true, 'Error - missing first name!']
     },
 
     imageUrl: {
@@ -26,7 +24,7 @@ const userSchema = new mongoose.Schema({
             _id: false,
             course: {
                 type: mongoose.Types.ObjectId,
-                ref: 'Course',
+                ref: 'Movie',
             },
 
             progress: {

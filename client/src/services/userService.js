@@ -6,6 +6,7 @@ export const registerUser = async (email, password, username) => {
     return request
         .post(api.registerUser(), { email  })
         .then(res => {
+            console.log(res)
             firebase.createUserWithEmailAndPassword(email, password)
         })
         .catch((err) => {
