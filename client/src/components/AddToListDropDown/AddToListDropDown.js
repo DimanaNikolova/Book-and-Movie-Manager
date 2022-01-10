@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const AddToListDropDown = (props) => {
+const AddToListDropDown = () => {
     const [displayDropDown, setDisplayDropdown] = useState(false)
 
     const dropDown = displayDropDown ? (
