@@ -4,6 +4,22 @@ const router = express.Router({ mergeParams: true })
 const User = require('../model/User')
 const mongoose = require('mongoose')
 
+
+const getUser = async (req, res, next) => {
+    let { email } = req.body
+
+    email = email.toLowerCase()
+    console.log(email)
+
+    try {
+        const user = await User.findOne({ email });
+        console.log(user)
+        return res.status(201).json({ user })
+    } catch (err) {
+        next(errorBuilder(err).badRequest(err.message))
+    }
+}
+
 const registerUser = async (req, res, next) => {
     let { email, username } = req.body
 
@@ -18,6 +34,7 @@ const registerUser = async (req, res, next) => {
     }
 }
 
+router.post('/get-user', getUser)
 router.post('/register-user', registerUser)
 
 module.exports = router

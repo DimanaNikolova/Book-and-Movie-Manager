@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
     movies: [
         {
             _id: false,
-            course: {
+            movie: {
                 type: mongoose.Types.ObjectId,
                 ref: 'Movie',
             },
