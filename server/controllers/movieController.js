@@ -44,8 +44,8 @@ const addMovieToList = async (req, res, next) => {
     }
 }
 
+router.get('/all-movies', getAllMovies)
 router.get('/:movieId', getMovie)
 router.put('/add-movie', addMovieToList)
-router.get('/all-movies', getAllMovies)
 
 module.exports = router
