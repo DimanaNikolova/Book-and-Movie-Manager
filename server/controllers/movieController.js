@@ -5,12 +5,22 @@ const Movie = require('../model/Movie')
 const User = require('../model/User')
 const mongoose = require('mongoose')
 
+const getMovie = async (req, res, next) => {
+    const { movieId } = req.params
+    try {
+        const movie = await Movie.findOne({ _id: movieId })
+        res.status(200).json(movie)
+    } catch (err) {
+        console.log(err)
+    }
+}
+
 const getAllMovies = async (req, res, next) => {
     try {
         const allMovies = await Movie.find()
         res.status(200).json(allMovies)
     } catch (err) {
-        next(errorBuilder(err).badRequest(err.message))
+        console.log(err)
     }
 }
 
@@ -26,8 +36,7 @@ const addMovieToList = async (req, res, next) => {
             { _id: uid.uid },
             { $push: { movies: { movie: movieId.movieId } } }
         )
-        console.log(updateMovie)
-        console.log(updateUser)
+        console.log('MOVIE ADDED TO LIST', updateMovie, updateUser)
 
         res.status(200).json(updateMovie)
     } catch (err) {
@@ -35,6 +44,7 @@ const addMovieToList = async (req, res, next) => {
     }
 }
 
+router.get('/:movieId', getMovie)
 router.put('/add-movie', addMovieToList)
 router.get('/all-movies', getAllMovies)
 

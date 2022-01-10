@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
+import { Link } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthContext'
 import { getAllMovies, addMovieToList } from '../../services/movieService'
 
@@ -11,6 +12,8 @@ const MovieCatalog = () => {
     useEffect(() => {
         getAllMovies().then((data) => {
             setMovies(data)
+        }).catch(e=>{
+            console.log(e)
         })
     }, [])
 
@@ -31,7 +34,7 @@ const MovieCatalog = () => {
                       key={movie.title}
                   >
                       <img src={movie.imgUrl} />
-                      <p>{movie.title}</p>
+                      <Link to={`/movie/${movie._id}`}>{movie.title}</Link>
                       <button
                           className='sign-button'
                           onClick={() => addMovie(movie)}
