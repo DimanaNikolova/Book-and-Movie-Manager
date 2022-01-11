@@ -6,6 +6,7 @@ import './MovieDetailsPage.scss'
 
 const MovieDetailsPage = (props) => {
     const [movie, setMovie] = useState(null)
+    const [isLoading, setIsLoading] = useState(true)
     const [progressData, setProgressData] = useState({})
     const auth = useContext(AuthContext)
     const movieId = props.match.params.id
@@ -15,11 +16,15 @@ const MovieDetailsPage = (props) => {
             setMovie(res)
             auth.user.movies.map((m) => {
                 m.movie === movieId
-                    ? setProgressData({ status: m.status, episodes: m.progress })
+                    ? setProgressData({
+                          status: m.status,
+                          episodes: m.progress,
+                      })
                     : null
             })
+            setIsLoading(false)
         })
-    }, [progressData])
+    }, [isLoading])
 
     const details = movie ? (
         <>
@@ -29,6 +34,12 @@ const MovieDetailsPage = (props) => {
             <p>Last Aired: {movie.episodes}</p>
         </>
     ) : null
+
+    const onEpisodesChange = (e) => {
+        console.log(e.target.value)
+        setProgressData(oldState => ({ ...oldState, episodes: e.target.value }))
+        console.log(progressData)
+    }
 
     const currentMovie = movie ? (
         <div className='current-movie'>
@@ -41,9 +52,13 @@ const MovieDetailsPage = (props) => {
                 <div className='movie-summary fcol'>
                     {progressData.status == 'watching' ? (
                         <h4>
-                            Progress:{' '}
-                            <input type='number' value={progressData.episodes} />/
-                            {movie.episodes}
+                            Progress:
+                            <input
+                                type="text" pattern="[0-9]*"
+                                value={progressData.episodes}
+                                onChange={(e) => onEpisodesChange(e)}
+                            />
+                            /{movie.episodes}
                         </h4>
                     ) : (
                         <h4>
