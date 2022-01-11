@@ -19,6 +19,14 @@
         }
         .movie-summary{
             width: 55%;
+            input{
+                // width: 40px;
+                text-align: right;
+                width: 70px;
+                margin-left:10px;
+                background-color: rgba(0, 0, 0, 0.2);
+                color: white;
+            }
         }
         .sign-button{
             width: 150px;

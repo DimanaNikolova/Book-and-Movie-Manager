@@ -36,7 +36,6 @@ const MovieDetailsPage = (props) => {
     ) : null
 
     const onEpisodesChange = (e) => {
-        console.log(e.target.value)
         setProgressData(oldState => ({ ...oldState, episodes: e.target.value }))
         updateWatchedEpisodes(auth.user._id, movieId, progressData.status, progressData.episodes)
         console.log(progressData)
@@ -55,7 +54,7 @@ const MovieDetailsPage = (props) => {
                         <h4>
                             Progress:
                             <input
-                                type="text" pattern="[0-9]*"
+                                type="number"
                                 value={progressData.episodes}
                                 onChange={(e) => onEpisodesChange(e)}
                             />
