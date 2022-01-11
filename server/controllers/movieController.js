@@ -25,7 +25,7 @@ const getAllMovies = async (req, res, next) => {
 }
 
 const addMovieToList = async (req, res, next) => {
-    const { uid, movieId } = req.body
+    const { uid, movieId, status } = req.body
 
     try {
         const updateMovie = await Movie.updateOne(
@@ -34,7 +34,7 @@ const addMovieToList = async (req, res, next) => {
         )
         const updateUser = await User.updateOne(
             { _id: uid.uid },
-            { $push: { movies: { movie: movieId.movieId } } }
+            { $push: { movies: { movie: movieId.movieId, status } } }
         )
         console.log('MOVIE ADDED TO LIST', updateMovie, updateUser)
 

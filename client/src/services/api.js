@@ -7,4 +7,4 @@ export const registerUser = () => `${url}/auth/register-user`
 //movie related
 export const getMovie = (movieId) => `${url}/movies/${movieId}`
 export const getAllMovies = () => `${url}/movies/all-movies`
-export const addMovieToList = (uid, movieId) => `${url}/movies/add-movie`
+export const addMovieToList = (uid, movieId, status) => `${url}/movies/add-movie`

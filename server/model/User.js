@@ -32,8 +32,7 @@ const userSchema = new mongoose.Schema({
                 default: 0,
             },
             status: {
-                type: Number,
-                default: 0,
+                type: String,
             },
 
             rating: {

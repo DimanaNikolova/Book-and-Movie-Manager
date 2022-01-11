@@ -1,31 +1,23 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { AuthContext } from '../../contexts/AuthContext'
-import { getAllMovies, addMovieToList } from '../../services/movieService'
+import { getAllMovies } from '../../services/movieService'
+import AddToListDropDown from '../AddToListDropDown/AddToListDropDown'
 
 import './MovieCatalog.scss'
 
 const MovieCatalog = () => {
     const [movies, setMovies] = useState([])
-    const auth = useContext(AuthContext)
 
     useEffect(() => {
-        getAllMovies().then((data) => {
-            setMovies(data)
-        }).catch(e=>{
-            console.log(e)
-        })
+        getAllMovies()
+            .then((data) => {
+                setMovies(data)
+            })
+            .catch((e) => {
+                console.log(e)
+            })
     }, [])
 
-    const addMovie = (movie) => {
-        const uid = auth.user._id
-        const movieId = movie._id
-        addMovieToList({ uid }, { movieId })
-            .then((res) => {
-                console.log(res)
-            })
-            .catch((e) => console.log(e))
-    }
     const loadMovies = movies
         ? movies.map((movie) => {
               return (
@@ -35,12 +27,7 @@ const MovieCatalog = () => {
                   >
                       <img src={movie.imgUrl} />
                       <Link to={`/movie/${movie._id}`}>{movie.title}</Link>
-                      <button
-                          className='sign-button'
-                          onClick={() => addMovie(movie)}
-                      >
-                          Add to list
-                      </button>
+                      <AddToListDropDown movie={movie}/>
                   </div>
               )
           })
