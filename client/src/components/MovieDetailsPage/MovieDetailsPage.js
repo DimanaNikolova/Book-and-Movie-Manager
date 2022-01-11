@@ -5,7 +5,6 @@ import './MovieDetailsPage.scss'
 
 const MovieDetailsPage = (props) => {
     const [movie, setMovie] = useState(null)
-    const [displayDropDown, setDisplayDropdown] = useState(false)
 
     const movieId = props.match.params.id
 
@@ -15,13 +14,6 @@ const MovieDetailsPage = (props) => {
         })
     }, [])
 
-    const dropDown = displayDropDown ? (
-        <>
-            <button className='sign-button'>Watching</button>
-            <button className='sign-button'>Completed</button>
-            <button className='sign-button'>Plan to Watch</button>
-        </>
-    ) : null
     const details = movie ? (
         <>
             <p>Title: {movie.title}</p>
@@ -44,7 +36,7 @@ const MovieDetailsPage = (props) => {
                     <p>
                         Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem
                         ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
-                        Lorem ipsum Lorem ipsum Lorem ipsum{' '}
+                        Lorem ipsum Lorem ipsum Lorem ipsum
                     </p>
                 </div>
             </div>
