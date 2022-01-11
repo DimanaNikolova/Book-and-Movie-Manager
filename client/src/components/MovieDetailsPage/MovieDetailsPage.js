@@ -6,8 +6,7 @@ import './MovieDetailsPage.scss'
 
 const MovieDetailsPage = (props) => {
     const [movie, setMovie] = useState(null)
-    const [episodes, setEpisodes] = useState(0)
-    const [status, setStatus] = useState('')
+    const [progressData, setProgressData] = useState({})
     const auth = useContext(AuthContext)
     const movieId = props.match.params.id
 
@@ -15,10 +14,12 @@ const MovieDetailsPage = (props) => {
         getMovie(movieId).then((res) => {
             setMovie(res)
             auth.user.movies.map((m) => {
-                m.movie === movieId ? setEpisodes(m.progress) && setStatus(m.status) : null
+                m.movie === movieId
+                    ? setProgressData({ status: m.status, episodes: m.progress })
+                    : null
             })
         })
-    }, [status])
+    }, [progressData])
 
     const details = movie ? (
         <>
@@ -38,7 +39,17 @@ const MovieDetailsPage = (props) => {
                     <AddToListDropDown movie={movie} />
                 </div>
                 <div className='movie-summary fcol'>
-                    <h4>Progress: {episodes}/{movie.episodes}</h4>
+                    {progressData.status == 'watching' ? (
+                        <h4>
+                            Progress:{' '}
+                            <input type='number' value={progressData.episodes} />/
+                            {movie.episodes}
+                        </h4>
+                    ) : (
+                        <h4>
+                            Progress: {progressData.episodes}/{movie.episodes}
+                        </h4>
+                    )}
                     <p>
                         Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem
                         ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
