@@ -1,18 +1,24 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useContext, useState } from 'react'
 import { getMovie } from '../../services/movieService'
 import AddToListDropDown from '../AddToListDropDown/AddToListDropDown'
+import { AuthContext } from '../../contexts/AuthContext'
 import './MovieDetailsPage.scss'
 
 const MovieDetailsPage = (props) => {
     const [movie, setMovie] = useState(null)
-
+    const [episodes, setEpisodes] = useState(0)
+    const [status, setStatus] = useState('')
+    const auth = useContext(AuthContext)
     const movieId = props.match.params.id
 
     useEffect(() => {
         getMovie(movieId).then((res) => {
             setMovie(res)
+            auth.user.movies.map((m) => {
+                m.movie === movieId ? setEpisodes(m.progress) && setStatus(m.status) : null
+            })
         })
-    }, [])
+    }, [status])
 
     const details = movie ? (
         <>
@@ -29,10 +35,10 @@ const MovieDetailsPage = (props) => {
             <div className='frow j-between'>
                 <div className='fcol a-cen'>
                     <img src={movie.imgUrl} />
-                    <AddToListDropDown movie={movie}/>
+                    <AddToListDropDown movie={movie} />
                 </div>
                 <div className='movie-summary fcol'>
-                    <p>Rating</p>
+                    <h4>Progress: {episodes}/{movie.episodes}</h4>
                     <p>
                         Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem
                         ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
