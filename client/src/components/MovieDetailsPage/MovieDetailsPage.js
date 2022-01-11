@@ -29,7 +29,7 @@ const MovieDetailsPage = (props) => {
             <div className='frow j-between'>
                 <div className='fcol a-cen'>
                     <img src={movie.imgUrl} />
-                    <AddToListDropDown/>
+                    <AddToListDropDown movie={movie}/>
                 </div>
                 <div className='movie-summary fcol'>
                     <p>Rating</p>

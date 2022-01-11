@@ -1,27 +1,54 @@
-import { useState, useContext } from 'react'
-import { getAllMovies, addMovieToList } from '../../services/movieService'
+import { useState, useContext, useEffect } from 'react'
+import { addMovieToList } from '../../services/movieService'
 import { AuthContext } from '../../contexts/AuthContext'
 
-const AddToListDropDown = ({movie}) => {
+const AddToListDropDown = ({ movie }) => {
     const [displayDropDown, setDisplayDropdown] = useState(false)
+    const [displayStatus, setDisplayStatus] = useState('Add to list')
     const auth = useContext(AuthContext)
+
+    useEffect(() => {
+        auth.user.movies.map((m) => {
+            m.movie === movie._id ? setDisplayStatus(m.status) : null
+        })
+    }, [])
 
     const addMovie = (status) => {
         const uid = auth.user._id
         const movieId = movie._id
-        //todo pass the episodes to check if completed
         addMovieToList({ uid }, { movieId }, status, movie.episodes)
             .then((res) => {
-                console.log(res)
+                setDisplayDropdown(false)
             })
             .catch((e) => console.log(e))
     }
 
     const dropDown = displayDropDown ? (
         <>
-            <button className='sign-button' onClick={()=>{addMovie('watching')}}>Watching</button>
-            <button className='sign-button' onClick={()=>{addMovie('completed')}}>Completed</button>
-            <button className='sign-button' onClick={()=>{addMovie('plan')}}>Plan to Watch</button>
+            <button
+                className='sign-button'
+                onClick={() => {
+                    addMovie('watching')
+                }}
+            >
+                Watching
+            </button>
+            <button
+                className='sign-button'
+                onClick={() => {
+                    addMovie('completed')
+                }}
+            >
+                Completed
+            </button>
+            <button
+                className='sign-button'
+                onClick={() => {
+                    addMovie('plan')
+                }}
+            >
+                Plan to Watch
+            </button>
         </>
     ) : null
 
@@ -33,7 +60,7 @@ const AddToListDropDown = ({movie}) => {
                     setDisplayDropdown(!displayDropDown)
                 }}
             >
-                Add to list
+                {displayStatus}
             </button>
             {dropDown}
         </>
