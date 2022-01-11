@@ -45,8 +45,39 @@ const addMovieToList = async (req, res, next) => {
     }
 }
 
+const updateWatchedEpisodes = async (req, res, next) => {
+    const { uid, movieId, status, episodes } = req.body
+    const progress = status == 'completed' ? episodes : 0
+    console.log(uid, movieId, status, episodes)
+
+    User.updateOne(
+        { _id: uid, "movies.movie": movieId },
+        {
+            $set: {
+                "movies.$.progress": episodes,
+             }
+        }
+    ).then(res=>{
+        console.log(res)
+    }).catch(e=>{
+        console.log(e)
+    })
+    try {
+        const updateUser = await User.updateOne(
+            { _id: uid.uid },
+            { $push: { movies: { movie: movieId.movieId, status, progress } } }
+        )
+        console.log('EPISODES UPDATED')
+
+        res.status(200).json(updateUser)
+    } catch (err) {
+        console.log(err)
+    }
+}
+
 router.get('/all-movies', getAllMovies)
 router.get('/:movieId', getMovie)
 router.put('/add-movie', addMovieToList)
+router.put('/update-episodes', updateWatchedEpisodes)
 
 module.exports = router

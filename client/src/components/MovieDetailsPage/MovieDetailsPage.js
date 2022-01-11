@@ -1,5 +1,5 @@
 import { useEffect, useContext, useState } from 'react'
-import { getMovie } from '../../services/movieService'
+import { getMovie, updateWatchedEpisodes } from '../../services/movieService'
 import AddToListDropDown from '../AddToListDropDown/AddToListDropDown'
 import { AuthContext } from '../../contexts/AuthContext'
 import './MovieDetailsPage.scss'
@@ -38,6 +38,7 @@ const MovieDetailsPage = (props) => {
     const onEpisodesChange = (e) => {
         console.log(e.target.value)
         setProgressData(oldState => ({ ...oldState, episodes: e.target.value }))
+        updateWatchedEpisodes(auth.user._id, movieId, progressData.status, progressData.episodes)
         console.log(progressData)
     }
 

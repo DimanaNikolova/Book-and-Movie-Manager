@@ -1,18 +1,4 @@
 {
-        "cSpell.words": [
-                "allday",
-                "automator",
-                "Beyoncé",
-                "Calendly",
-                "luxon",
-                "Millis",
-                "prefill",
-                "Timeslot",
-                "TIMESLOTS",
-                "toastify",
-                "UPSKILL",
-                "Xmessages"
-        ],
         "[*]": {
                 "editor.formatOnSave": true,
                 "editor.formatOnPaste": true

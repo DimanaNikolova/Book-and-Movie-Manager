@@ -11,3 +11,8 @@ export const addMovieToList = (uid, movieId, status, episodes) =>
     request
         .put(api.addMovieToList(), { uid, movieId, status, episodes })
         .then((data) => data.json())
+
+export const updateWatchedEpisodes = (uid, movieId, status, episodes) =>
+    request
+        .put(api.updateWatchedEpisodes(), { uid, movieId, status, episodes })
+        .then((data) => data.json())

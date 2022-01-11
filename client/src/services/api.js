@@ -8,3 +8,4 @@ export const registerUser = () => `${url}/auth/register-user`
 export const getMovie = (movieId) => `${url}/movies/${movieId}`
 export const getAllMovies = () => `${url}/movies/all-movies`
 export const addMovieToList = (uid, movieId, status, episodes) => `${url}/movies/add-movie`
+export const updateWatchedEpisodes = (uid, movieId, status, episodes) => `${url}/movies/update-episodes`
