@@ -9,7 +9,8 @@ const AddToListDropDown = ({movie}) => {
     const addMovie = (status) => {
         const uid = auth.user._id
         const movieId = movie._id
-        addMovieToList({ uid }, { movieId }, status)
+        //todo pass the episodes to check if completed
+        addMovieToList({ uid }, { movieId }, status, movie.episodes)
             .then((res) => {
                 console.log(res)
             })

@@ -25,18 +25,19 @@ const getAllMovies = async (req, res, next) => {
 }
 
 const addMovieToList = async (req, res, next) => {
-    const { uid, movieId, status } = req.body
+    const { uid, movieId, status, episodes } = req.body
+    const progress = status == 'completed' ? episodes : 0
 
     try {
         const updateMovie = await Movie.updateOne(
             { _id: movieId.movieId },
-            { $push: { users: { user: uid.uid } } }
+            { $push: { users: { user: uid.uid, status } } }
         )
         const updateUser = await User.updateOne(
             { _id: uid.uid },
-            { $push: { movies: { movie: movieId.movieId, status } } }
+            { $push: { movies: { movie: movieId.movieId, status, progress } } }
         )
-        console.log('MOVIE ADDED TO LIST', updateMovie, updateUser)
+        console.log('MOVIE ADDED TO LIST')
 
         res.status(200).json(updateMovie)
     } catch (err) {
