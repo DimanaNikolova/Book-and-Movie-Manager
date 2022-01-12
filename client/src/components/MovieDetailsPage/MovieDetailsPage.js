@@ -1,7 +1,7 @@
 import { useEffect, useContext, useState } from 'react'
 import { getMovie, updateWatchedEpisodes } from '../../services/movieService'
-import AddToListDropDown from '../AddToListDropDown/AddToListDropDown'
 import { AuthContext } from '../../contexts/AuthContext'
+import CurrentMovie from './CurrentMovie/CurrentMovie'
 import './MovieDetailsPage.scss'
 
 const MovieDetailsPage = (props) => {
@@ -30,21 +30,6 @@ const MovieDetailsPage = (props) => {
         })
     }, [isLoading])
 
-    const details = movie ? (
-        <>
-            <p>Title: {movie.title}</p>
-            <p>Episodes: {movie.episodes}</p>
-            <p>First Aired: {movie.episodes}</p>
-            <p>Last Aired: {movie.episodes}</p>
-        </>
-    ) : null
-
-    const onEpisodesChange = (e) => {
-        setUpdatedEpisodes(e.target.value)
-
-        console.log(updatedEpisodes)
-    }
-
     useEffect(() => {
         updateWatchedEpisodes(
             auth.user._id,
@@ -54,46 +39,25 @@ const MovieDetailsPage = (props) => {
         )
     }, [updatedEpisodes])
 
-    const currentMovie = movie ? (
-        <div className='current-movie'>
-            <h1>{movie.title}</h1>
-            <div className='frow j-between'>
-                <div className='fcol a-cen'>
-                    <img src={movie.imgUrl} />
-                    <AddToListDropDown movie={movie} />
-                </div>
-                <div className='movie-summary fcol'>
-                    {progressData.status == 'watching' ? (
-                        <h4>
-                            Progress:
-                            <input
-                                type='number'
-                                value={updatedEpisodes}
-                                onChange={(e) => onEpisodesChange(e)}
-                            />
-                            /{movie.episodes}
-                        </h4>
-                    ) : (
-                        <h4>
-                            Progress: {updatedEpisodes}/{movie.episodes}
-                        </h4>
-                    )}
-                    <p>
-                        Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem
-                        ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
-                        Lorem ipsum Lorem ipsum Lorem ipsum
-                    </p>
-                </div>
-            </div>
-        </div>
-    ) : null
     return (
         <div className='details-page-container frow'>
             <div className='details fcol'>
                 <h3>Details</h3>
-                {details}
+                {movie ? (
+                    <>
+                        <p>Title: {movie.title}</p>
+                        <p>Episodes: {movie.episodes}</p>
+                        <p>First Aired: {movie.episodes}</p>
+                        <p>Last Aired: {movie.episodes}</p>
+                    </>
+                ) : null}
             </div>
-            {currentMovie}
+            <CurrentMovie
+                movie={movie}
+                progressData={progressData}
+                updatedEpisodes={updatedEpisodes}
+                setUpdatedEpisodes={setUpdatedEpisodes}
+            />
         </div>
     )
 }
