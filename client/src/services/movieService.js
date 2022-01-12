@@ -7,9 +7,9 @@ export const getMovie = (movieId) =>
 export const getAllMovies = () =>
     request.get(api.getAllMovies()).then((data) => data.json())
 
-export const addMovieToList = (uid, movieId, status, episodes) =>
+export const addMovieToList = (uid, movieId, status, episodes, title) =>
     request
-        .put(api.addMovieToList(), { uid, movieId, status, episodes })
+        .put(api.addMovieToList(), { uid, movieId, status, episodes, title })
         .then((data) => data.json())
 
 export const updateWatchedEpisodes = (uid, movieId, status, episodes) =>

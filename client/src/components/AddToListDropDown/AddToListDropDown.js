@@ -16,7 +16,7 @@ const AddToListDropDown = ({ movie }) => {
     const addMovie = (status) => {
         const uid = auth.user._id
         const movieId = movie._id
-        addMovieToList({ uid }, { movieId }, status, movie.episodes)
+        addMovieToList({ uid }, { movieId }, status, movie.episodes, movie.title)
             .then((res) => {
                 setDisplayDropdown(false)
             })

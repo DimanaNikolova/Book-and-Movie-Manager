@@ -34,6 +34,9 @@ const userSchema = new mongoose.Schema({
             status: {
                 type: String,
             },
+            title: {
+                type: String,
+            },
 
             rating: {
                 type: Number,

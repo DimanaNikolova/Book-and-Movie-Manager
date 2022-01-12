@@ -12,6 +12,7 @@ import SignInPage from './components/SignInPage/SignInPage'
 import PageContainer from './components/PageContainer/PageContainer'
 import MovieCatalog from './components/MovieCatalog/MovieCatalog'
 import MovieDetailsPage from './components/MovieDetailsPage/MovieDetailsPage'
+import ProfilePage from './components/ProfilePage/ProfilePage'
 
 import AuthContextProvider from './contexts/AuthContext'
 
@@ -27,6 +28,7 @@ function App() {
                     <Route path='/sign-in' component={SignInPage} />
                     <PrivateRoute path='/movie-catalog' component={MovieCatalog} />
                     <PrivateRoute path='/movie/:id' component={MovieDetailsPage} />
+                    <PrivateRoute path='/profile' component={ProfilePage} />
                 </PageContainer>
                 </AuthContextProvider>
             </Switch>
