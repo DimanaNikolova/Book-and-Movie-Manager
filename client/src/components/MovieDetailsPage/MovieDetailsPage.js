@@ -8,6 +8,9 @@ const MovieDetailsPage = (props) => {
     const [movie, setMovie] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
     const [progressData, setProgressData] = useState({})
+    const [updatedEpisodes, setUpdatedEpisodes] = useState(
+        progressData.episodes
+    )
     const auth = useContext(AuthContext)
     const movieId = props.match.params.id
 
@@ -22,6 +25,7 @@ const MovieDetailsPage = (props) => {
                       })
                     : null
             })
+            setUpdatedEpisodes(progressData.episodes)
             setIsLoading(false)
         })
     }, [isLoading])
@@ -36,10 +40,19 @@ const MovieDetailsPage = (props) => {
     ) : null
 
     const onEpisodesChange = (e) => {
-        setProgressData(oldState => ({ ...oldState, episodes: e.target.value }))
-        updateWatchedEpisodes(auth.user._id, movieId, progressData.status, progressData.episodes)
-        console.log(progressData)
+        setUpdatedEpisodes(e.target.value)
+
+        console.log(updatedEpisodes)
     }
+
+    useEffect(() => {
+        updateWatchedEpisodes(
+            auth.user._id,
+            movieId,
+            progressData.status,
+            updatedEpisodes
+        )
+    }, [updatedEpisodes])
 
     const currentMovie = movie ? (
         <div className='current-movie'>
@@ -54,15 +67,15 @@ const MovieDetailsPage = (props) => {
                         <h4>
                             Progress:
                             <input
-                                type="number"
-                                value={progressData.episodes}
+                                type='number'
+                                value={updatedEpisodes}
                                 onChange={(e) => onEpisodesChange(e)}
                             />
                             /{movie.episodes}
                         </h4>
                     ) : (
                         <h4>
-                            Progress: {progressData.episodes}/{movie.episodes}
+                            Progress: {updatedEpisodes}/{movie.episodes}
                         </h4>
                     )}
                     <p>
