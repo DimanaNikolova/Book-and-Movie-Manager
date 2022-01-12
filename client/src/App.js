@@ -2,7 +2,7 @@ import { Switch, Route } from 'react-router-dom'
 
 import './App.css'
 
-import { authGuard } from './hoc/authGuard'
+import PrivateRoute from './hoc/PrivateRoute'
 
 import HomePage from './components/HomePage/HomePage'
 import SignUpPage from './components/SignUpPage/SignUpPage'
@@ -20,11 +20,11 @@ function App() {
                 <AuthContextProvider>
 
                 <PageContainer>
-                    <Route exact path='/' component={authGuard(HomePage, MovieCatalog)} />
+                    <Route exact path='/' component={HomePage} />
                     <Route path='/sign-up' component={SignUpPage} />
                     <Route path='/sign-in' component={SignInPage} />
-                    <Route path='/movie-catalog' component={MovieCatalog} />
-                    <Route path='/movie/:id' component={MovieDetailsPage} />
+                    <PrivateRoute path='/movie-catalog' component={MovieCatalog} />
+                    <PrivateRoute path='/movie/:id' component={MovieDetailsPage} />
                 </PageContainer>
                 </AuthContextProvider>
             </Switch>
