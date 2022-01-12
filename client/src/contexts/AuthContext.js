@@ -20,6 +20,7 @@ export default function AuthContextProvider({ children }) {
                 })
             } else {
                 setUser(null)
+                setUserData(null)
                 setLoading(false)
             }
         })
