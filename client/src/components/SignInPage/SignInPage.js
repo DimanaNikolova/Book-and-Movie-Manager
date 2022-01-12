@@ -1,11 +1,12 @@
 import { useState } from 'react'
+import { useHistory  } from 'react-router-dom'
 import firebase from '../../config/firebase'
 import './SignUpPage.scss'
 
 const SignInPage = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-
+    const history = useHistory()
     const onSubmitHandler = (e) => {
         e.preventDefault()
         firebase
@@ -14,15 +15,10 @@ const SignInPage = () => {
                 password
             )
             .then((userCredential) => {
-                const user = userCredential.user
-                console.log(userCredential)
-                console.log(user)
+                history.push('/')
             })
             .catch((error) => {
-                const errorCode = error.code
-                const errorMessage = error.message
                 console.log(error)
-                // ..
             })
     }
 

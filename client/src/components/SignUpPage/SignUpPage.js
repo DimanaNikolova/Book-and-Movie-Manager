@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import firebase from '../../config/firebase'
+import { useHistory } from 'react-router-dom'
 import { registerUser } from '../../services/userService'
 import './SignUpPage.scss'
 
@@ -8,13 +8,16 @@ const SignUpPage = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [repeatPassword, setRepeatPassword] = useState('')
-
+    const history = useHistory()
     const onSubmitHandler = (e) => {
         e.preventDefault()
-        registerUser(email, password, username).then(res=>{
-            // todo redirect
-            console.log('it is a promise')
-        })
+        registerUser(email, password, username)
+            .then((res) => {
+                history.push('/')
+            })
+            .catch((e) => {
+                console.log(e)
+            })
     }
 
     return (
@@ -40,8 +43,16 @@ const SignUpPage = () => {
                 onSubmit={onSubmitHandler}
             >
                 <h3>Join us now!</h3>
-                <input type='text' onChange={(e) => setEmail(e.target.value)} placeholder='Email'/>
-                <input type='text' onChange={(e) => setUsername(e.target.value)} placeholder='Username'/>
+                <input
+                    type='text'
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder='Email'
+                />
+                <input
+                    type='text'
+                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder='Username'
+                />
                 <input
                     type='password'
                     onChange={(e) => setPassword(e.target.value)}

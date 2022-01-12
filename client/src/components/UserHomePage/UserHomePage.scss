@@ -1,0 +1,17 @@
+.user-homepage-container{
+    margin-top: 50px;
+    .catalog-link{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        border: 1px solid white;
+        width: 300px;
+        padding: 30px;
+        align-items: center;
+        height: 70vh;
+        text-align: center;
+        img{
+            max-width: 200px;
+        }
+    }
+}
