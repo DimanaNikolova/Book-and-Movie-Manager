@@ -19,6 +19,9 @@ const NavBar = () => {
                         <Link to='/movie-catalog' className='sign-button'>
                             Movies
                         </Link>
+                        <Link to='/profile' className='sign-button'>
+                            Profile
+                        </Link>
                         <Link
                             to='/'
                             className='sign-button'

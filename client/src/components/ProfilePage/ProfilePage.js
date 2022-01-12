@@ -1,26 +1,17 @@
 import { useEffect, useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthContext'
+import TableItems from './TableItems.js/TableItems'
 import './ProfilePage.scss'
 
 const ProfilePage = (props) => {
     const [movies, setMovies] = useState([])
     const auth = useContext(AuthContext)
+    
     useEffect(() => {
         setMovies(auth.user.movies)
     }, [])
 
-    const loadMovies = movies
-        ? movies.map((m) => {
-              return (
-                  <tr>
-                      <td>{m.title}</td>
-                      <td>{m.status}</td>
-                      <td>{m.progress}</td>
-                  </tr>
-              )
-          })
-        : null
     return (
         <div className='profile-page-container frow a-cen j-around'>
             <div className='user-info fcol a-cen'>
@@ -34,12 +25,7 @@ const ProfilePage = (props) => {
                     <Link>My comics</Link>
                 </div>
                 <div className='current-items'>
-                    <table>
-                        <th>Name</th>
-                        <th>Status</th>
-                        <th>Progress</th>
-                    {loadMovies}
-                    </table>
+                    <TableItems items={movies}/>
                 </div>
             </div>
         </div>
