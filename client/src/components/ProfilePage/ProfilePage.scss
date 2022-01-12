@@ -5,6 +5,15 @@
         height: 200px;
         background-color: gray;
     }
+    .profile-items-navigation{
+     width: 500px;
+     span{
+         padding: 10px;
+     }
+     span:hover{
+        background-color: rgba(255, 255, 255, 0.2);
+     }
+    }
     .current-items {
         h3{
             margin-top: 30px;

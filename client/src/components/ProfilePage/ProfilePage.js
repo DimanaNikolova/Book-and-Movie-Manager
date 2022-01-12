@@ -5,11 +5,11 @@ import TableItems from './TableItems.js/TableItems'
 import './ProfilePage.scss'
 
 const ProfilePage = (props) => {
-    const [movies, setMovies] = useState([])
+    const [items, setItems] = useState([])
     const auth = useContext(AuthContext)
-    
+
     useEffect(() => {
-        setMovies(auth.user.movies)
+        setItems(auth.user.movies)
     }, [])
 
     return (
@@ -19,13 +19,19 @@ const ProfilePage = (props) => {
                 <p>{auth.user.email}</p>
             </div>
             <div>
-                <div className='profile-items-navigation'>
-                    <Link>My movies</Link>
-                    <Link>My books</Link>
-                    <Link>My comics</Link>
+                <div className='profile-items-navigation frow j-between'>
+                    <span>
+                        <Link>My Movies</Link>
+                    </span>
+                    <span>
+                        <Link>My Books</Link>
+                    </span>
+                    <span>
+                        <Link>My Comics</Link>
+                    </span>
                 </div>
                 <div className='current-items'>
-                    <TableItems items={movies}/>
+                    <TableItems items={items} />
                 </div>
             </div>
         </div>
