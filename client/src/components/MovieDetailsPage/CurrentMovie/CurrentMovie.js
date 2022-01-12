@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import AddToListDropDown from '../../AddToListDropDown/AddToListDropDown'
 
 const MovieDetailsPage = ({ movie, progressData, setUpdatedEpisodes, updatedEpisodes }) => {
@@ -18,6 +17,8 @@ const MovieDetailsPage = ({ movie, progressData, setUpdatedEpisodes, updatedEpis
                             <input
                                 type='number'
                                 value={updatedEpisodes}
+                                min={0}
+                                max={movie.episodes}
                                 onChange={(e) =>
                                     setUpdatedEpisodes(e.target.value)
                                 }
