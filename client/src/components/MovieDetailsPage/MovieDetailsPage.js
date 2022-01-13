@@ -8,9 +8,7 @@ const MovieDetailsPage = (props) => {
     const [movie, setMovie] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
     const [progressData, setProgressData] = useState({})
-    const [updatedEpisodes, setUpdatedEpisodes] = useState(
-        progressData.episodes
-    )
+    const [updatedEpisodes, setUpdatedEpisodes] = useState(progressData.episodes)
     const auth = useContext(AuthContext)
     const movieId = props.match.params.id
 

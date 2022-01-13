@@ -7,6 +7,7 @@ import './MovieCatalog.scss'
 
 const MovieCatalog = () => {
     const [movies, setMovies] = useState([])
+    const [statusData, setStatusData] = useState()
 
     useEffect(() => {
         getAllMovies()
@@ -27,7 +28,7 @@ const MovieCatalog = () => {
                   >
                       <img src={movie.imgUrl} />
                       <Link to={`/movie/${movie._id}`}>{movie.title}</Link>
-                      <AddToListDropDown movie={movie}/>
+                      <AddToListDropDown movie={movie} passStatusData={setStatusData}/>
                   </div>
               )
           })
