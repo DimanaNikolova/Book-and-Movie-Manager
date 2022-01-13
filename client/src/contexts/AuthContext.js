@@ -19,6 +19,7 @@ export default function AuthContextProvider({ children }) {
                 getUser(user.email).then((data) => {
                     setUser(user)
                     setUserData(data)
+                    refreshUserData()
                     setLoading(false)
                 })
             } else {
@@ -27,46 +28,21 @@ export default function AuthContextProvider({ children }) {
                 setLoading(false)
             }
         })
-    }, [])
-
-    useEffect(() => {
-        if (location.pathname === '/profile') {
-            firebase.onAuthStateChanged((user) => {
-                if (user) {
-                    setLoading(true)
-                    getUser(user.email).then((data) => {
-                        setUser(user)
-                        setUserData(data)
-                        refreshUserData()
-                        setLoading(false)
-                    })
-                } else {
-                    setUser(null)
-                    setUserData(null)
-                    setLoading(false)
-                }
-            })
-        }
     }, [location.pathname])
 
     const refreshUserData = () => {
         if (user) {
-            console.log('user detected')
             getUser(user.email).then((data) => {
                 setUser(user)
                 setUserData(data)
                 setLoading(false)
-                console.log('data refreshed')
             })
         }
     }
 
     return (
         <>
-            <AuthContext.Provider
-                value={{ user: userData, refreshUserData }}
-                refreshUserData={refreshUserData}
-            >
+            <AuthContext.Provider value={{ user: userData, refreshUserData }}>
                 {!loading && children}
             </AuthContext.Provider>
         </>
