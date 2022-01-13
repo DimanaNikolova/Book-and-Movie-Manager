@@ -8,13 +8,13 @@ const AddToListDropDown = ({ movie }) => {
     const auth = useContext(AuthContext)
 
     useEffect(() => {
-        auth.user.movies.map((m) => {
+        auth.user.user.movies.map((m) => {
             m.movie === movie._id ? setDisplayStatus(m.status) : null
         })
     }, [])
 
     const addMovie = (status) => {
-        const uid = auth.user._id
+        const uid = auth.user.user._id
         const movieId = movie._id
         addMovieToList({ uid }, { movieId }, status, movie.episodes, movie.title)
             .then((res) => {

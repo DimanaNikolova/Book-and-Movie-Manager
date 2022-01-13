@@ -9,14 +9,14 @@ const ProfilePage = (props) => {
     const auth = useContext(AuthContext)
 
     useEffect(() => {
-        setItems(auth.user.movies)
+        setItems(auth.user.user.movies)
     }, [])
 
     return (
         <div className='profile-page-container frow a-cen j-around'>
             <div className='user-info fcol a-cen'>
                 <div className='profile-picture'></div>
-                <p>{auth.user.email}</p>
+                <p>{auth.user.user.email}</p>
             </div>
             <div>
                 <div className='profile-items-navigation frow j-between'>

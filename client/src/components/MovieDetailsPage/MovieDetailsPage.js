@@ -17,7 +17,7 @@ const MovieDetailsPage = (props) => {
     useEffect(() => {
         getMovie(movieId).then((res) => {
             setMovie(res)
-            auth.user.movies.map((m) => {
+            auth.user.user.movies.map((m) => {
                 m.movie === movieId
                     ? setProgressData({
                           status: m.status,
@@ -32,7 +32,7 @@ const MovieDetailsPage = (props) => {
 
     useEffect(() => {
         updateWatchedEpisodes(
-            auth.user._id,
+            auth.user.user._id,
             movieId,
             progressData.status,
             updatedEpisodes
