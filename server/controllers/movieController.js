@@ -56,6 +56,7 @@ const addMovieToList = async (req, res, next) => {
                 ).then(res=>{
                     console.log(res)
                 })
+                res.status(200).json()
         } else{
              User.updateOne(
                     { _id: uid.uid, 'movies.movie': movieId.movieId },
@@ -79,6 +80,7 @@ const addMovieToList = async (req, res, next) => {
                 ).then(res=>{
                     console.log(res)
                 })
+                res.status(200).json({})
                 }
         }).catch(e=>{
             console.log(e)

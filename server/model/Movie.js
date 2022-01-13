@@ -19,6 +19,14 @@ const movieSchema = new mongoose.Schema({
         type: String,
     },
 
+    startDate: {
+        type: String,
+    },
+
+    endDate: {
+        type: String,
+    },
+
     users: [
         {
             _id: false,

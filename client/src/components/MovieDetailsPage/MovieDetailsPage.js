@@ -45,10 +45,10 @@ const MovieDetailsPage = (props) => {
                 <h3>Details</h3>
                 {movie ? (
                     <>
-                        <p>Title: {movie.title}</p>
-                        <p>Episodes: {movie.episodes}</p>
-                        <p>First Aired: {movie.episodes}</p>
-                        <p>Last Aired: {movie.episodes}</p>
+                        <p><span>Title:</span> {movie.title}</p>
+                        <p><span>Episodes:</span> {movie.episodes}</p>
+                        <p><span>First Aired:</span> {movie.startDate}</p>
+                        <p><span>Last Aired:</span> {movie.endDate}</p>
                     </>
                 ) : null}
             </div>
