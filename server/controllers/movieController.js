@@ -24,7 +24,7 @@ const getAllMovies = async (req, res, next) => {
     }
 }
 
-const addMovieToList = async (req, res, next) => {
+const addMovieToList = async (req, response, next) => {
     const { uid, movieId, status, episodes, title } = req.body
     const progress = status == 'completed' ? episodes : 0
 
@@ -34,31 +34,27 @@ const addMovieToList = async (req, res, next) => {
         })
         .then((res) => {
             if (!res.includes(movieId.movieId)) {
-               
-                Movie.updateOne(
+                const updateMovie = Movie.updateOne(
                     { _id: movieId.movieId },
                     { $push: { users: { user: uid.uid, status } } }
-                ).then(res=>{
-                    console.log(res)
-                })
-                User.updateOne(
+                )
+                
+                const updateUser = User.updateOne(
                     { _id: uid.uid },
                     {
                         $push: {
-                            movies: {
-                                movie: movieId.movieId,
-                                status,
-                                progress,
-                                title,
+                            movies: {movie: movieId.movieId, status, progress,  title,
                             },
                         },
                     }
-                ).then(res=>{
-                    console.log(res)
+                )
+
+                Promise.all([updateMovie, updateUser]).then((values) => {
+                    response.status(200).json()
                 })
-                res.status(200).json()
-        } else{
-             User.updateOne(
+
+            } else {
+                const updateUser = User.updateOne(
                     { _id: uid.uid, 'movies.movie': movieId.movieId },
                     {
                         $set: {
@@ -66,10 +62,9 @@ const addMovieToList = async (req, res, next) => {
                             'movies.$.progress': progress,
                         },
                     }
-                ).then(res=>{
-                    console.log(res)
-                })
-                Movie.updateOne(
+                )
+
+                const updateMovie = Movie.updateOne(
                     { _id: movieId.movieId, 'users.user': uid.uid },
                     {
                         $set: {
@@ -77,15 +72,15 @@ const addMovieToList = async (req, res, next) => {
                             'users.$.progress': progress,
                         },
                     }
-                ).then(res=>{
-                    console.log(res)
+                )
+                Promise.all([updateMovie, updateUser]).then((values) => {
+                    response.status(200).json()
                 })
-                res.status(200).json({})
-                }
-        }).catch(e=>{
+            }
+        })
+        .catch((e) => {
             console.log(e)
         })
-        
 }
 
 const updateWatchedEpisodes = async (req, res, next) => {
