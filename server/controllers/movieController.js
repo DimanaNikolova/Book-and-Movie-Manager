@@ -50,7 +50,7 @@ const addMovieToList = async (req, response, next) => {
                 )
 
                 Promise.all([updateMovie, updateUser]).then((values) => {
-                    response.status(200).json()
+                    response.status(200).json(values)
                 })
 
             } else {
@@ -74,7 +74,7 @@ const addMovieToList = async (req, response, next) => {
                     }
                 )
                 Promise.all([updateMovie, updateUser]).then((values) => {
-                    response.status(200).json()
+                    response.status(200).json(values)
                 })
             }
         })
@@ -95,8 +95,6 @@ const updateWatchedEpisodes = async (req, res, next) => {
                 },
             }
         )
-        console.log('EPISODES UPDATED')
-
         res.status(200).json(updateUser)
     } catch (err) {
         console.log(err)

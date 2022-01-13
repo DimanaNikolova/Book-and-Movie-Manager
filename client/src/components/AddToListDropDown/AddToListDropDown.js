@@ -11,17 +11,24 @@ const AddToListDropDown = ({ movie }) => {
         auth.user.user.movies.map((m) => {
             m.movie === movie._id ? setDisplayStatus(m.status) : null
         })
-    }, [displayDropDown])
+    }, [])
 
     const addMovie = (status) => {
         const uid = auth.user.user._id
         const movieId = movie._id
-        addMovieToList({ uid }, { movieId }, status, movie.episodes, movie.title)
+        addMovieToList(
+            { uid },
+            { movieId },
+            status,
+            movie.episodes,
+            movie.title
+        )
             .then((res) => {
-                console.log(res)
+                setDisplayDropdown(!displayDropDown)
+                setDisplayStatus(status)
+                auth.refreshUserData()
             })
             .catch((e) => console.log(e))
-        setDisplayDropdown(!displayDropDown)
     }
 
     const dropDown = displayDropDown ? (
@@ -53,16 +60,20 @@ const AddToListDropDown = ({ movie }) => {
         </>
     ) : null
 
+    const initialButton = (
+        <button
+            className='sign-button'
+            onClick={() => {
+                setDisplayDropdown(!displayDropDown)
+            }}
+        >
+            {displayStatus}
+        </button>
+    )
+
     return (
         <>
-            <button
-                className='sign-button'
-                onClick={() => {
-                    setDisplayDropdown(!displayDropDown)
-                }}
-            >
-                {displayStatus}
-            </button>
+            {!displayDropDown || displayStatus == 'Add to list'  ? initialButton : null}
             {dropDown}
         </>
     )
