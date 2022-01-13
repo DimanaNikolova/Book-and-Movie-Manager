@@ -5,7 +5,7 @@ import CurrentMovie from './CurrentMovie/CurrentMovie'
 import './MovieDetailsPage.scss'
 
 const MovieDetailsPage = (props) => {
-    const [movie, setMovie] = useState(null)
+    const [movie, setMovie] = useState()
     const [isLoading, setIsLoading] = useState(true)
     const [progressData, setProgressData] = useState({})
     const [updatedEpisodes, setUpdatedEpisodes] = useState(progressData.episodes)
@@ -38,17 +38,14 @@ const MovieDetailsPage = (props) => {
     }, [updatedEpisodes])
 
     return (
-        <div className='details-page-container frow'>
+        movie ? <div className='details-page-container frow'>
             <div className='details fcol'>
                 <h3>Details</h3>
-                {movie ? (
-                    <>
                         <p><span>Title:</span> {movie.title}</p>
                         <p><span>Episodes:</span> {movie.episodes}</p>
                         <p><span>First Aired:</span> {movie.startDate}</p>
                         <p><span>Last Aired:</span> {movie.endDate}</p>
-                    </>
-                ) : null}
+
             </div>
             <CurrentMovie
                 movie={movie}
@@ -56,7 +53,7 @@ const MovieDetailsPage = (props) => {
                 updatedEpisodes={updatedEpisodes}
                 setUpdatedEpisodes={setUpdatedEpisodes}
             />
-        </div>
+        </div> : null
     )
 }
 

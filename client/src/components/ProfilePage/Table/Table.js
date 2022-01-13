@@ -20,7 +20,7 @@ const TableItems = ({ items, status }) => {
             <table>
                 <th className="td-title">Name</th>
                 <th>Status</th>
-                <th>Progress</th>
+                <th>Watched</th>
                 {loadItems}
             </table>
         </>

@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from 'react'
 import { addMovieToList } from '../../services/movieService'
 import { AuthContext } from '../../contexts/AuthContext'
+import Button from './Button/Button'
 
 const AddToListDropDown = ({ movie, passStatusData }) => {
     const [displayDropDown, setDisplayDropdown] = useState(false)
@@ -9,7 +10,12 @@ const AddToListDropDown = ({ movie, passStatusData }) => {
 
     useEffect(() => {
         auth.user.user.movies.map((m) => {
-            m.movie === movie._id ? passStatusData({status: m.status, watchedEpisodes: m.progress}): null
+            m.movie === movie._id
+                ? passStatusData({
+                      status: m.status,
+                      watchedEpisodes: m.progress,
+                  })
+                : null
             m.movie === movie._id ? setDisplayStatus(m.status) : null
         })
     }, [])
@@ -27,7 +33,12 @@ const AddToListDropDown = ({ movie, passStatusData }) => {
             .then((res) => {
                 setDisplayDropdown(!displayDropDown)
                 setDisplayStatus(status)
-                status == 'completed' ? passStatusData({status, watchedEpisodes: movie.episodes}) : passStatusData({status, watchedEpisodes:0})
+                status == 'completed'
+                    ? passStatusData({
+                          status,
+                          watchedEpisodes: movie.episodes,
+                      })
+                    : passStatusData({ status, watchedEpisodes: 0 })
                 auth.refreshUserData()
             })
             .catch((e) => console.log(e))
@@ -35,30 +46,9 @@ const AddToListDropDown = ({ movie, passStatusData }) => {
 
     const dropDown = displayDropDown ? (
         <>
-            <button
-                className='sign-button'
-                onClick={() => {
-                    addMovie('watching')
-                }}
-            >
-                Watching
-            </button>
-            <button
-                className='sign-button'
-                onClick={() => {
-                    addMovie('completed')
-                }}
-            >
-                Completed
-            </button>
-            <button
-                className='sign-button'
-                onClick={() => {
-                    addMovie('plan')
-                }}
-            >
-                Plan to Watch
-            </button>
+            <Button addMovie={addMovie} action={'watching'} />
+            <Button addMovie={addMovie} action={'completed'} />
+            <Button addMovie={addMovie} action={'plan'} />
         </>
     ) : null
 
@@ -75,7 +65,9 @@ const AddToListDropDown = ({ movie, passStatusData }) => {
 
     return (
         <>
-            {!displayDropDown || displayStatus == 'Add to list'  ? initialButton : null}
+            {!displayDropDown || displayStatus == 'Add to list'
+                ? initialButton
+                : null}
             {dropDown}
         </>
     )

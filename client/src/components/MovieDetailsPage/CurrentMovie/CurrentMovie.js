@@ -7,10 +7,11 @@ const CurrentMovie = ({
     setUpdatedEpisodes,
     updatedEpisodes,
 }) => {
-    const [statusData, setStatusData] = useState()
+    const [statusData, setStatusData] = useState({status: 'Add to list', watchedEpisodes:0})
     const [displayEpisodes, setDisplayEpisodes] = useState(updatedEpisodes)
 
     useEffect(() => {
+        console.log(movie)
         console.log(statusData)
         if (statusData) {
             setDisplayEpisodes(statusData.watchedEpisodes)
@@ -19,6 +20,7 @@ const CurrentMovie = ({
             setStatusData(progressData.status)
         }
     }, [progressData, statusData])
+
 
     const watchingInput = movie && (
         <input

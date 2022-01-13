@@ -19,7 +19,6 @@ export default function AuthContextProvider({ children }) {
                 getUser(user.email).then((data) => {
                     setUser(user)
                     setUserData(data)
-                    refreshUserData()
                     setLoading(false)
                 })
             } else {
@@ -28,7 +27,7 @@ export default function AuthContextProvider({ children }) {
                 setLoading(false)
             }
         })
-    }, [location.pathname])
+    }, [])
 
     const refreshUserData = () => {
         if (user) {
