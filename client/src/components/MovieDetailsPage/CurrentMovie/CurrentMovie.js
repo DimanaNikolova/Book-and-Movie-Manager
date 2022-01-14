@@ -34,7 +34,7 @@ const CurrentMovie = ({
                 </div>
                 <div className='movie-summary fcol'>
                     <h4>
-                        Progress: 
+                        Progress:{' '}
                         {statusData.status == 'watching' ? (
                             <input
                                 type='number'
