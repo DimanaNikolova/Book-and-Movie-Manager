@@ -5,15 +5,14 @@ import './SignUpPage.scss'
 
 const SignUpPage = () => {
     const [email, setEmail] = useState('')
-    const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [repeatPassword, setRepeatPassword] = useState('')
     const history = useHistory()
+
     const onSubmitHandler = (e) => {
         e.preventDefault()
-        registerUser(email, password, username)
+        registerUser(email, password)
             .then((res) => {
-                history.push('/')
+                    history.push('/')
             })
             .catch((e) => {
                 console.log(e)
@@ -49,17 +48,9 @@ const SignUpPage = () => {
                     placeholder='Email'
                 />
                 <input
-                    type='text'
-                    onChange={(e) => setUsername(e.target.value)}
-                    placeholder='Username'
-                />
-                <input
                     type='password'
                     onChange={(e) => setPassword(e.target.value)}
-                />
-                <input
-                    type='password'
-                    onChange={(e) => setRepeatPassword(e.target.value)}
+                    placeholder='Password'
                 />
                 <input className='sign-button' type='submit' />
             </form>

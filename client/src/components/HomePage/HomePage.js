@@ -5,13 +5,10 @@ const HomePage = () => {
     return (
         <>
             <div className='homepage-container fcol a-cen j-around'>
-                <h1>Travel to space now!</h1>
+                <h1>Book and Movie Manager</h1>
                 <p>
-                    NASApp is an inovative website created for everyone who
-                    wants to know more than today the did yesterday. We offer
-                    you to find more about the space within ant the galaxy you
-                    hold in your own self. Discover more about the universe by
-                    joining us!
+                Book and Movie Manager allows you to keep track of all your favourite book and movie series as well as manga and comics editions!
+                Never miss an episode of your favourite show again and keep your to-watch list organised!
                 </p>
                 <div>Shall we go?</div>
                 <div className='frow'>

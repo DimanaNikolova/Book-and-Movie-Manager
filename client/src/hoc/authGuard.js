@@ -3,14 +3,13 @@ import {AuthContext} from '../contexts/AuthContext'
 
 export const authGuard = (IsGuest, IsAuthenticated) => {
     const WrapperComponent = (propsGuest, propsAuthenticated) => {
-        const currentUser = useContext(AuthContext)
-
+        const auth = useContext(AuthContext)
         const [isLoading, setIsLoading] = useState(true)
-        setTimeout(() => setIsLoading(false), 200)
-        console.log(currentUser)
-        if (!currentUser && IsGuest) {
+        setTimeout(() => setIsLoading(false), 100)
+
+        if (!auth.user && IsGuest) {
             return !isLoading && <IsGuest {...propsGuest} />
-        } else if (currentUser && IsAuthenticated) {
+        } else if (auth.user && IsAuthenticated) {
             return !isLoading && <IsAuthenticated {...propsAuthenticated} />
         }
     }

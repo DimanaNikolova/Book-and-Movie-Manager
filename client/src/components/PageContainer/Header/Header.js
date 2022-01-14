@@ -14,7 +14,7 @@ const NavBar = () => {
                 MANAGER
             </Link>
             <span className='navbar-buttons frow'>
-                {auth ? (
+                {auth.user ? (
                     <>
                         <Link to='/movie-catalog' className='sign-button'>
                             Movies

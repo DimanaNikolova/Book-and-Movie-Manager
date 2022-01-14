@@ -21,7 +21,6 @@ function App() {
         <div className='App'>
             <Switch>
                 <AuthContextProvider>
-
                 <PageContainer>
                     <Route exact path='/' component={authGuard(HomePage, UserHomePage)} />
                     <Route path='/sign-up' component={SignUpPage} />
