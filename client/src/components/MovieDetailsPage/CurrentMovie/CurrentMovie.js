@@ -7,7 +7,7 @@ const CurrentMovie = ({
     setUpdatedEpisodes,
     updatedEpisodes,
 }) => {
-    const [statusData, setStatusData] = useState({status: 'Add to list', watchedEpisodes:0})
+    const [statusData, setStatusData] = useState({status: 'Add to list', watchedEpisodes: 0})
     const [displayEpisodes, setDisplayEpisodes] = useState(updatedEpisodes)
 
     useEffect(() => {
@@ -20,17 +20,6 @@ const CurrentMovie = ({
             setStatusData(progressData.status)
         }
     }, [progressData, statusData])
-
-
-    const watchingInput = movie && (
-        <input
-            type='number'
-            value={updatedEpisodes}
-            min={0}
-            max={movie.episodes}
-            onChange={(e) => setUpdatedEpisodes(e.target.value)}
-        />
-    )
 
     return statusData && movie ? (
         <div className='current-movie'>
@@ -45,12 +34,24 @@ const CurrentMovie = ({
                 </div>
                 <div className='movie-summary fcol'>
                     <h4>
-                        Progress:{' '}
-                        {statusData.status == 'watching'
-                            ? watchingInput
-                            : displayEpisodes}
+                        Progress:
+                        {statusData.status == 'watching' ? (
+                            <input
+                                type='number'
+                                value={updatedEpisodes}
+                                min={0}
+                                max={movie.episodes}
+                                onChange={(e) =>
+                                    setUpdatedEpisodes(e.target.value)
+                                }
+                            />
+                        ) : (
+                            displayEpisodes
+                        )}
                         /{movie.episodes}
                     </h4>
+
+                    <h4>My rating:</h4>
 
                     <p>{movie.synopsis}</p>
                 </div>
