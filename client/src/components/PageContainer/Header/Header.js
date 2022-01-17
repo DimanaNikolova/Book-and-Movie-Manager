@@ -10,12 +10,13 @@ const NavBar = () => {
 
     return (
         <nav className='main-navbar frow'>
-            <Link to='/'>
-                MANAGER
-            </Link>
+            <Link to='/'>MANAGER</Link>
             <span className='navbar-buttons frow'>
                 {auth.user ? (
                     <>
+                        <Link to='/book-catalog' className='sign-button'>
+                            Books
+                        </Link>
                         <Link to='/movie-catalog' className='sign-button'>
                             Movies
                         </Link>

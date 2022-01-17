@@ -32,9 +32,9 @@ const MovieDetailsPage = (props) => {
             <div className='details fcol'>
                 <h3>Details</h3>
                         <p><span>Title:</span> {movie.title}</p>
-                        <p><span>Episodes:</span> {movie.episodes}</p>
-                        <p><span>First Aired:</span> {movie.startDate}</p>
-                        <p><span>Last Aired:</span> {movie.endDate}</p>
+                        <p><span>{movie.type == 'movie'? 'Episodes: ' : 'Pages: '}</span> {movie.episodes}</p>
+                        <p><span>Start date:</span> {movie.startDate}</p>
+                        <p><span>End date:</span> {movie.endDate}</p>
 
             </div>
             <CurrentMovie

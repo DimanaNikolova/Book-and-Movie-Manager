@@ -27,6 +27,10 @@ const movieSchema = new mongoose.Schema({
         type: String,
     },
 
+    type: {
+        type: String,
+    },
+
     users: [
         {
             _id: false,

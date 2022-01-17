@@ -26,7 +26,8 @@ function App() {
                     <Route path='/sign-up' component={SignUpPage} />
                     <Route path='/sign-in' component={SignInPage} />
                     <PrivateRoute path='/movie-catalog' component={MovieCatalog} />
-                    <PrivateRoute path='/movie/:id' component={MovieDetailsPage} />
+                    <PrivateRoute path='/book-catalog' component={MovieCatalog} />
+                    <PrivateRoute path='/item/:id' component={MovieDetailsPage} />
                     <PrivateRoute path='/profile' component={ProfilePage} />
                 </PageContainer>
                 </AuthContextProvider>
