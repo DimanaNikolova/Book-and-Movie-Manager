@@ -9,3 +9,4 @@ export const getMovie = (movieId) => `${url}/movies/${movieId}`
 export const getAllMovies = () => `${url}/movies/all-movies`
 export const addMovieToList = (uid, movieId, status, episodes) => `${url}/movies/add-movie`
 export const updateWatchedEpisodes = (uid, movieId, status, episodes, title) => `${url}/movies/update-episodes`
+export const updateRating = (uid, movieId, rating) => `${url}/movies/update-rating`

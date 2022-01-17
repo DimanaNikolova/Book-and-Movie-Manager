@@ -16,3 +16,8 @@ export const updateWatchedEpisodes = (uid, movieId, status, episodes) =>
     request
         .put(api.updateWatchedEpisodes(), { uid, movieId, status, episodes })
         .then((data) => data.json())
+
+export const updateRating = (uid, movieId, rating) =>
+    request
+        .put(api.updateRating(), { uid, movieId, rating })
+        .then((data) => data.json())

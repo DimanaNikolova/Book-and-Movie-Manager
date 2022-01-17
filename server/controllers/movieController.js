@@ -43,7 +43,11 @@ const addMovieToList = async (req, response, next) => {
                     { _id: uid.uid },
                     {
                         $push: {
-                            movies: {movie: movieId.movieId, status, progress,  title,
+                            movies: {
+                                movie: movieId.movieId,
+                                status,
+                                progress,
+                                title,
                             },
                         },
                     }
@@ -52,7 +56,6 @@ const addMovieToList = async (req, response, next) => {
                 Promise.all([updateMovie, updateUser]).then((values) => {
                     response.status(200).json(values)
                 })
-
             } else {
                 const updateUser = User.updateOne(
                     { _id: uid.uid, 'movies.movie': movieId.movieId },
@@ -101,9 +104,28 @@ const updateWatchedEpisodes = async (req, res, next) => {
     }
 }
 
+const updateRating = async (req, res, next) => {
+    const { uid, movieId, rating } = req.body
+
+    try {
+        const updateUser = await User.updateOne(
+            { _id: uid, 'movies.movie': movieId },
+            {
+                $set: {
+                    'movies.$.rating': rating,
+                },
+            }
+        )
+        res.status(200).json(updateUser)
+    } catch (err) {
+        console.log(err)
+    }
+}
+
 router.get('/all-movies', getAllMovies)
 router.get('/:movieId', getMovie)
 router.put('/add-movie', addMovieToList)
 router.put('/update-episodes', updateWatchedEpisodes)
+router.put('/update-rating', updateRating)
 
 module.exports = router
