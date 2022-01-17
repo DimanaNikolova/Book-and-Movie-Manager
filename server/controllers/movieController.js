@@ -25,7 +25,7 @@ const getAllMovies = async (req, res, next) => {
 }
 
 const addMovieToList = async (req, response, next) => {
-    const { uid, movieId, status, episodes, title } = req.body
+    const { uid, movieId, status, episodes, title, type } = req.body
     const progress = status == 'completed' ? episodes : 0
 
     User.findOne({ _id: uid.uid })
@@ -48,6 +48,7 @@ const addMovieToList = async (req, response, next) => {
                                 status,
                                 progress,
                                 title,
+                                type
                             },
                         },
                     }

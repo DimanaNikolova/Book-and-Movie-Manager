@@ -1,16 +1,19 @@
 import { useEffect, useContext, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthContext'
 import TableItems from './TableItems.js/TableItems'
 import './ProfilePage.scss'
 
-const ProfilePage = (props) => {
+const ProfilePage = () => {
     const [items, setItems] = useState([])
     const auth = useContext(AuthContext)
+    const location = useLocation()
 
     useEffect(() => {
         setItems(auth.user.user.movies)
-    }, [])
+        console.log(location.pathname)
+        console.log(items)
+    }, [location])
 
     return (
         <div className='profile-page-container frow a-cen j-around'>
@@ -21,10 +24,10 @@ const ProfilePage = (props) => {
             <div>
                 <div className='profile-items-navigation frow j-between'>
                     <span>
-                        <Link>My Movies</Link>
+                        <Link to='/profile/my-movies'>My Movies</Link>
                     </span>
                     <span>
-                        <Link>My Books</Link>
+                        <Link to='/profile/my-books'>My Books</Link>
                     </span>
                     <span>
                         <Link>My Comics</Link>

@@ -20,7 +20,7 @@ const NavBar = () => {
                         <Link to='/movie-catalog' className='sign-button'>
                             Movies
                         </Link>
-                        <Link to='/profile' className='sign-button'>
+                        <Link to='/profile/my-movies' className='sign-button'>
                             Profile
                         </Link>
                         <Link

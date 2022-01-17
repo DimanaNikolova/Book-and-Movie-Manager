@@ -28,7 +28,8 @@ const AddToListDropDown = ({ movie, passStatusData }) => {
             { movieId },
             status,
             movie.episodes,
-            movie.title
+            movie.title,
+            movie.type
         )
             .then((res) => {
                 setDisplayDropdown(!displayDropDown)
