@@ -52,7 +52,7 @@ const CurrentMovie = ({
                         )}
                         /{movie.episodes}
                     </h4>
-                    <MoiveRating progressData={progressData} movieId={movie._id}/>
+                    <MoiveRating statusData={statusData} movieId={movie._id} progressData={progressData}/>
                     <p>{movie.synopsis}</p>
                 </div>
             </div>

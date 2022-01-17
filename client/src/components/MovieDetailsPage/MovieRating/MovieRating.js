@@ -1,9 +1,9 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { updateRating } from '../../../services/movieService'
 import { AuthContext } from '../../../contexts/AuthContext'
 
-const MoiveRating = ({ progressData, movieId }) => {
-    const [updatedRating, setUpdatedRating] = useState(progressData.rating)
+const MoiveRating = ({ statusData, movieId, progressData }) => {
+    const [updatedRating, setUpdatedRating] = useState(statusData.rating)
     const auth = useContext(AuthContext)
     const uid = auth.user.user._id
 
@@ -25,8 +25,8 @@ const MoiveRating = ({ progressData, movieId }) => {
         </h4>
     )
 
-    return progressData.status == 'completed' ||
-        progressData.status == 'watching'
+    return statusData.status == 'completed' ||
+        statusData.status == 'watching'
         ? ratingHeading
         : null
 }
