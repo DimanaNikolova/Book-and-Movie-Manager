@@ -8,6 +8,9 @@ const TableItems = ({ items }) => {
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
+        setWatching([])
+        setCompleted([])
+        setPlan([])
         if (items) {
             items.map((m) => {
                 m.status == 'watching'
@@ -22,7 +25,7 @@ const TableItems = ({ items }) => {
             })
             setIsLoading(false)
         }
-    }, [isLoading])
+    }, [isLoading, items])
 
     return (
         <>{!isLoading ? 

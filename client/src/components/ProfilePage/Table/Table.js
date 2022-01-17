@@ -1,5 +1,10 @@
 import { Link } from "react-router-dom"
+import { useEffect } from "react"
 const TableItems = ({ items, status }) => {
+
+    useEffect(()=>{
+
+    },[items])
     const loadItems = items ? (
         items.map((m) => {
             return (

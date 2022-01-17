@@ -10,9 +10,15 @@ const ProfilePage = () => {
     const location = useLocation()
 
     useEffect(() => {
-        setItems(auth.user.user.movies)
-        console.log(location.pathname)
-        console.log(items)
+        if (location.pathname == '/profile/my-books') {
+            setItems(
+                auth.user.user.movies.filter((item) => item.type == 'book')
+            )
+        } else if (location.pathname == '/profile/my-movies') {
+            setItems(
+                auth.user.user.movies.filter((item) => item.type == 'movie')
+            )
+        }
     }, [location])
 
     return (
