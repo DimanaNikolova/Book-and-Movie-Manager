@@ -1,5 +1,5 @@
 import { useEffect, useContext, useState } from 'react'
-import { getMovie, updateWatchedEpisodes } from '../../services/movieService'
+import { getMovie } from '../../services/movieService'
 import { AuthContext } from '../../contexts/AuthContext'
 import CurrentMovie from './CurrentMovie/CurrentMovie'
 import './MovieDetailsPage.scss'
@@ -8,7 +8,6 @@ const MovieDetailsPage = (props) => {
     const [movie, setMovie] = useState()
     const [isLoading, setIsLoading] = useState(true)
     const [progressData, setProgressData] = useState({})
-    const [updatedEpisodes, setUpdatedEpisodes] = useState(progressData.episodes)
     const auth = useContext(AuthContext)
     const movieId = props.match.params.id
 
@@ -24,19 +23,9 @@ const MovieDetailsPage = (props) => {
                       })
                     : null
             })
-            setUpdatedEpisodes(progressData.episodes)
             setIsLoading(false)
         })
     }, [isLoading])
-
-    // useEffect(() => {
-    //     updateWatchedEpisodes(
-    //         auth.user.user._id,
-    //         movieId,
-    //         progressData.status,
-    //         updatedEpisodes
-    //     )
-    // }, [updatedEpisodes])
 
     return (
         movie ? <div className='details-page-container frow'>
@@ -51,8 +40,6 @@ const MovieDetailsPage = (props) => {
             <CurrentMovie
                 movie={movie}
                 progressData={progressData}
-                // updatedEpisodes={updatedEpisodes}
-                // setUpdatedEpisodes={setUpdatedEpisodes}
             />
         </div> : null
     )
