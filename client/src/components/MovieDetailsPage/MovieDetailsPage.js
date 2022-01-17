@@ -20,6 +20,7 @@ const MovieDetailsPage = (props) => {
                     ? setProgressData({
                           status: m.status,
                           episodes: m.progress,
+                          rating: m.rating,
                       })
                     : null
             })

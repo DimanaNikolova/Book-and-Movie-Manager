@@ -1,5 +1,6 @@
 import { useState, useContext, useEffect } from 'react'
 import AddToListDropDown from '../../AddToListDropDown/AddToListDropDown'
+import MoiveRating from '../MovieRating/MovieRating'
 
 const CurrentMovie = ({
     movie,
@@ -7,12 +8,13 @@ const CurrentMovie = ({
     setUpdatedEpisodes,
     updatedEpisodes,
 }) => {
-    const [statusData, setStatusData] = useState({status: 'Add to list', watchedEpisodes: 0})
+    const [statusData, setStatusData] = useState({
+        status: 'Add to list',
+        watchedEpisodes: 0,
+    })
     const [displayEpisodes, setDisplayEpisodes] = useState(updatedEpisodes)
 
     useEffect(() => {
-        console.log(movie)
-        console.log(statusData)
         if (statusData) {
             setDisplayEpisodes(statusData.watchedEpisodes)
         } else {
@@ -50,9 +52,7 @@ const CurrentMovie = ({
                         )}
                         /{movie.episodes}
                     </h4>
-
-                    <h4>My rating:</h4>
-
+                    <MoiveRating progressData={progressData}/>
                     <p>{movie.synopsis}</p>
                 </div>
             </div>
