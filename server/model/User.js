@@ -31,23 +31,18 @@ const userSchema = new mongoose.Schema({
                 type: Number,
                 default: 0,
             },
+            
             status: {
                 type: String,
             },
+
             title: {
                 type: String,
             },
 
             rating: {
                 type: Number,
-            },
-
-            startDate: {
-                type: Date,
-            },
-
-            endDate: {
-                type: Date,
+                default: ''
             },
         },
     ],
