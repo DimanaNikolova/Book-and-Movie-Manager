@@ -5,7 +5,7 @@ const TableItems = ({ items, status }) => {
             return (
                 <tr key={m.title}>
                     <td ><Link to={'/movie/' + m.movie}>{m.title}</Link></td>
-                    <td>{m.status}</td>
+                    <td>{m.rating ? m.rating : 'N/A'}</td>
                     <td>{m.progress}</td>
                 </tr>
             )
@@ -19,7 +19,7 @@ const TableItems = ({ items, status }) => {
             <h3>{status}</h3>
             <table>
                 <th className="td-title">Name</th>
-                <th>Status</th>
+                <th>Rating</th>
                 <th>Watched</th>
                 {loadItems}
             </table>
