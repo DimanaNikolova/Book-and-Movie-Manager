@@ -1,27 +1,29 @@
-import { useState, useContext, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import AddToListDropDown from '../../AddToListDropDown/AddToListDropDown'
 import MoiveRating from '../MovieRating/MovieRating'
+import MovieProgress from '../MovieProgress/MovieProgress'
 
 const CurrentMovie = ({
     movie,
     progressData,
-    setUpdatedEpisodes,
-    updatedEpisodes,
+    // setUpdatedEpisodes,
+    // updatedEpisodes,
 }) => {
     const [statusData, setStatusData] = useState({
         status: 'Add to list',
         watchedEpisodes: 0,
     })
-    const [displayEpisodes, setDisplayEpisodes] = useState(updatedEpisodes)
+    // const [displayEpisodes, setDisplayEpisodes] = useState(updatedEpisodes)
 
-    useEffect(() => {
-        if (statusData) {
-            setDisplayEpisodes(statusData.watchedEpisodes)
-        } else {
-            setDisplayEpisodes(progressData.episodes)
-            setStatusData(progressData.status)
-        }
-    }, [progressData, statusData])
+    // useEffect(() => {
+    //     console.log(statusData)
+    //     if (statusData) {
+    //         setDisplayEpisodes(statusData.watchedEpisodes)
+    //     } else {
+    //         setDisplayEpisodes(progressData.episodes)
+    //         setStatusData(progressData.status)
+    //     }
+    // }, [progressData, statusData])
 
     return statusData && movie ? (
         <div className='current-movie'>
@@ -35,23 +37,7 @@ const CurrentMovie = ({
                     />
                 </div>
                 <div className='movie-summary fcol'>
-                    <h4>
-                        Progress:{' '}
-                        {statusData.status == 'watching' ? (
-                            <input
-                                type='number'
-                                value={updatedEpisodes}
-                                min={0}
-                                max={movie.episodes}
-                                onChange={(e) =>
-                                    setUpdatedEpisodes(e.target.value)
-                                }
-                            />
-                        ) : (
-                            displayEpisodes
-                        )}
-                        /{movie.episodes}
-                    </h4>
+                    <MovieProgress statusData={statusData} movie={movie} progressData={progressData}/>
                     <MoiveRating statusData={statusData} movieId={movie._id} progressData={progressData}/>
                     <p>{movie.synopsis}</p>
                 </div>

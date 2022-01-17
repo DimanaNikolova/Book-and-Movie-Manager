@@ -29,14 +29,14 @@ const MovieDetailsPage = (props) => {
         })
     }, [isLoading])
 
-    useEffect(() => {
-        updateWatchedEpisodes(
-            auth.user.user._id,
-            movieId,
-            progressData.status,
-            updatedEpisodes
-        )
-    }, [updatedEpisodes])
+    // useEffect(() => {
+    //     updateWatchedEpisodes(
+    //         auth.user.user._id,
+    //         movieId,
+    //         progressData.status,
+    //         updatedEpisodes
+    //     )
+    // }, [updatedEpisodes])
 
     return (
         movie ? <div className='details-page-container frow'>
@@ -51,8 +51,8 @@ const MovieDetailsPage = (props) => {
             <CurrentMovie
                 movie={movie}
                 progressData={progressData}
-                updatedEpisodes={updatedEpisodes}
-                setUpdatedEpisodes={setUpdatedEpisodes}
+                // updatedEpisodes={updatedEpisodes}
+                // setUpdatedEpisodes={setUpdatedEpisodes}
             />
         </div> : null
     )
