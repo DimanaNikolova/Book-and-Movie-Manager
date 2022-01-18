@@ -1,10 +1,10 @@
 import { useEffect, useContext, useState } from 'react'
 import { getMovie } from '../../services/movieService'
 import { AuthContext } from '../../contexts/AuthContext'
-import CurrentMovie from './CurrentMovie/CurrentMovie'
-import './MovieDetailsPage.scss'
+import CurrentItemBox from './CurrentItemBox/CurrentMovie'
+import './ItemDetailsPage.scss'
 
-const MovieDetailsPage = (props) => {
+const ItemDetailsPage = (props) => {
     const [movie, setMovie] = useState()
     const [isLoading, setIsLoading] = useState(true)
     const [progressData, setProgressData] = useState({})
@@ -37,7 +37,7 @@ const MovieDetailsPage = (props) => {
                         <p><span>End date:</span> {movie.endDate}</p>
 
             </div>
-            <CurrentMovie
+            <CurrentItemBox
                 movie={movie}
                 progressData={progressData}
             />
@@ -45,4 +45,4 @@ const MovieDetailsPage = (props) => {
     )
 }
 
-export default MovieDetailsPage
+export default ItemDetailsPage

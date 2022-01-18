@@ -1,4 +1,4 @@
-const AddToListDropDown = ({ addMovie, action }) => {
+const AddToListDropDown = ({ addMovie, action, bookStatus }) => {
     return (
         <button
             className='sign-button'
@@ -6,7 +6,7 @@ const AddToListDropDown = ({ addMovie, action }) => {
                 addMovie(action)
             }}
         >
-            {action}
+            {bookStatus ? bookStatus : action}
         </button>
     )
 }

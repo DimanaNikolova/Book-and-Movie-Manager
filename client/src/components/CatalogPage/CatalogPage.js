@@ -4,9 +4,9 @@ import { getAllMovies } from '../../services/movieService'
 import AddToListDropDown from '../AddToListDropDown/AddToListDropDown'
 import { useLocation } from 'react-router-dom'
 
-import './MovieCatalog.scss'
+import './CatalogPage.scss'
 
-const MovieCatalog = () => {
+const CatalogPage = () => {
     const [item, setItems] = useState([])
     const [statusData, setStatusData] = useState()
 
@@ -54,4 +54,4 @@ const MovieCatalog = () => {
     )
 }
 
-export default MovieCatalog
+export default CatalogPage

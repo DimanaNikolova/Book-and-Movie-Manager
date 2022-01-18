@@ -17,6 +17,7 @@ const AddToListDropDown = ({ movie, passStatusData }) => {
                   })
                 : null
             m.movie === movie._id ? setDisplayStatus(m.status) : null
+            m.movie === movie._id && movie.type == 'book' && m.status=='watching' ? setDisplayStatus('reading') : null
         })
     }, [])
 
@@ -47,7 +48,11 @@ const AddToListDropDown = ({ movie, passStatusData }) => {
 
     const dropDown = displayDropDown ? (
         <>
-            <Button addMovie={addMovie} action={'watching'} />
+            <Button
+                addMovie={addMovie}
+                action={'watching'}
+                bookStatus={movie.type == 'book' ? 'reading' : null}
+            />
             <Button addMovie={addMovie} action={'completed'} />
             <Button addMovie={addMovie} action={'plan'} />
         </>

@@ -2,7 +2,7 @@ import { useState, useContext } from 'react'
 import { updateWatchedEpisodes } from '../../../services/movieService'
 import { AuthContext } from '../../../contexts/AuthContext'
 
-const MovieProgress = ({ statusData, movie, progressData }) => {
+const ItemProgress = ({ statusData, movie, progressData }) => {
     const [updatedEpisodes, setUpdatedEpisodes] = useState(statusData.episodes)
     const auth = useContext(AuthContext)
     const uid = auth.user.user._id
@@ -32,4 +32,4 @@ const MovieProgress = ({ statusData, movie, progressData }) => {
     </h4>
 }
 
-export default MovieProgress
+export default ItemProgress

@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import AddToListDropDown from '../../AddToListDropDown/AddToListDropDown'
-import MoiveRating from '../MovieRating/MovieRating'
-import MovieProgress from '../MovieProgress/MovieProgress'
+import ItemRating from '../ItemRating/ItemRating'
+import ItemProgress from '../ItemProgress/ItemProgress'
 
-const CurrentMovie = ({
+const CurrentItemBox = ({
     movie,
     progressData,
 }) => {
@@ -24,8 +24,8 @@ const CurrentMovie = ({
                     />
                 </div>
                 <div className='movie-summary fcol'>
-                    <MovieProgress statusData={statusData} movie={movie} progressData={progressData}/>
-                    <MoiveRating statusData={statusData} movieId={movie._id} progressData={progressData}/>
+                    <ItemProgress statusData={statusData} movie={movie} progressData={progressData}/>
+                    <ItemRating statusData={statusData} movieId={movie._id} progressData={progressData}/>
                     <p>{movie.synopsis}</p>
                 </div>
             </div>
@@ -33,4 +33,4 @@ const CurrentMovie = ({
     ) : null
 }
 
-export default CurrentMovie
+export default CurrentItemBox

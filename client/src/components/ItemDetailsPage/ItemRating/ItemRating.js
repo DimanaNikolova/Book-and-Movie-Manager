@@ -2,7 +2,7 @@ import { useState, useContext } from 'react'
 import { updateRating } from '../../../services/movieService'
 import { AuthContext } from '../../../contexts/AuthContext'
 
-const MoiveRating = ({ statusData, movieId, progressData }) => {
+const ItemRating = ({ statusData, movieId, progressData }) => {
     const [updatedRating, setUpdatedRating] = useState(statusData.rating)
     const auth = useContext(AuthContext)
     const uid = auth.user.user._id
@@ -31,4 +31,4 @@ const MoiveRating = ({ statusData, movieId, progressData }) => {
         : null
 }
 
-export default MoiveRating
+export default ItemRating
