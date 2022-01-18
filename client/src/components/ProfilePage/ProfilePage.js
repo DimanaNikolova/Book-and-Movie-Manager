@@ -2,6 +2,7 @@ import { useEffect, useContext, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthContext'
 import TableItems from './TableItems.js/TableItems'
+import profilepicture from '../../assets/images/profilepicture.png'
 import './ProfilePage.scss'
 
 const ProfilePage = () => {
@@ -24,7 +25,7 @@ const ProfilePage = () => {
     return (
         <div className='profile-page-container frow a-cen j-around'>
             <div className='user-info fcol a-cen'>
-                <div className='profile-picture'></div>
+                <img src={profilepicture} className='profile-picture'/>
                 <p>{auth.user.user.email}</p>
             </div>
             <div>

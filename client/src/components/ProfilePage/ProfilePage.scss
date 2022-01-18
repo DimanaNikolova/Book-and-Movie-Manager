@@ -2,8 +2,9 @@
     margin-top: 70px;
     .profile-picture {
         width: 200px;
-        height: 200px;
-        background-color: gray;
+        background-color: rgba(255, 255, 255, 0.2);
+        margin-bottom: 30px;
+        border: 1px solid white;
     }
     .profile-items-navigation{
      width: 500px;
