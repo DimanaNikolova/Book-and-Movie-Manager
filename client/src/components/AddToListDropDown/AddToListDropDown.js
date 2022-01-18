@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from 'react'
-import { addMovieToList } from '../../services/movieService'
+import { addItemToList } from '../../services/movieService'
 import { AuthContext } from '../../contexts/AuthContext'
 import Button from './Button/Button'
 
@@ -24,7 +24,7 @@ const AddToListDropDown = ({ item, passStatusData }) => {
     const addMovie = (status) => {
         const uid = auth.user.user._id
         const movieId = item._id
-        addMovieToList(
+        addItemToList(
             { uid },
             { movieId },
             status,

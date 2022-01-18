@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
             _id: false,
             movie: {
                 type: mongoose.Types.ObjectId,
-                ref: 'Movie',
+                ref: 'Item',
             },
 
             progress: {

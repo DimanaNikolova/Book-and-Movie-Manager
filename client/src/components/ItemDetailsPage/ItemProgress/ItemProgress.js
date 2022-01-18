@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react'
-import { updateWatchedEpisodes } from '../../../services/movieService'
+import { updateItemProgress } from '../../../services/movieService'
 import { AuthContext } from '../../../contexts/AuthContext'
 
 const ItemProgress = ({ statusData, item, progressData }) => {
@@ -9,7 +9,7 @@ const ItemProgress = ({ statusData, item, progressData }) => {
 
     const progressChangeHandler = (e) => {
         setUpdatedEpisodes(e.target.value)
-        updateWatchedEpisodes(uid, item._id, statusData.status, e.target.value)
+        updateItemProgress(uid, item._id, statusData.status, e.target.value)
     }
 
     const progressHeading = (

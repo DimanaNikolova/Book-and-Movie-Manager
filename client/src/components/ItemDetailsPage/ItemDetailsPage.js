@@ -1,5 +1,5 @@
 import { useEffect, useContext, useState } from 'react'
-import { getMovie } from '../../services/movieService'
+import { getItem } from '../../services/movieService'
 import { AuthContext } from '../../contexts/AuthContext'
 import CurrentItemBox from './CurrentItemBox/CurrentMovie'
 import './ItemDetailsPage.scss'
@@ -12,7 +12,7 @@ const ItemDetailsPage = (props) => {
     const movieId = props.match.params.id
 
     useEffect(() => {
-        getMovie(movieId).then((res) => {
+        getItem(movieId).then((res) => {
             setMovie(res)
             auth.user.user.movies.map((m) => {
                 m.movie === movieId

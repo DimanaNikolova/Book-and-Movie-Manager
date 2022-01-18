@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const movieSchema = new mongoose.Schema({
+const itemSchema = new mongoose.Schema({
     id: mongoose.Types.ObjectId,
 
     title: {
@@ -49,4 +49,6 @@ const movieSchema = new mongoose.Schema({
     ],
 })
 
-module.exports = mongoose.model('Movie', movieSchema)
+
+
+module.exports = mongoose.model('Item', itemSchema)

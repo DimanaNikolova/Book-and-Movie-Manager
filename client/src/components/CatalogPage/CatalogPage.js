@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { getAllMovies } from '../../services/movieService'
+import { getAllItems } from '../../services/movieService'
 import AddToListDropDown from '../AddToListDropDown/AddToListDropDown'
 import { useLocation } from 'react-router-dom'
 
@@ -13,7 +13,7 @@ const CatalogPage = () => {
     const location = useLocation()
 
     useEffect(() => {
-        getAllMovies()
+        getAllItems()
             .then((data) => {
                 location.pathname == '/book-catalog'
                     ? setItems(data.filter((item) => item.type == 'book'))

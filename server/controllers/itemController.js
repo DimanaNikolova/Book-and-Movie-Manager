@@ -1,30 +1,30 @@
 const express = require('express')
 const router = express.Router({ mergeParams: true })
 
-const Movie = require('../model/Movie')
+const Item = require('../model/Item')
 const User = require('../model/User')
 const mongoose = require('mongoose')
 
-const getMovie = async (req, res, next) => {
+const getItem = async (req, res, next) => {
     const { movieId } = req.params
     try {
-        const movie = await Movie.findOne({ _id: movieId })
+        const movie = await Item.findOne({ _id: movieId })
         res.status(200).json(movie)
     } catch (err) {
         console.log(err)
     }
 }
 
-const getAllMovies = async (req, res, next) => {
+const getAllItems = async (req, res, next) => {
     try {
-        const allMovies = await Movie.find()
+        const allMovies = await Item.find()
         res.status(200).json(allMovies)
     } catch (err) {
         console.log(err)
     }
 }
 
-const addMovieToList = async (req, response, next) => {
+const addItemToList = async (req, response, next) => {
     const { uid, movieId, status, episodes, title, type } = req.body
     const progress = status == 'completed' ? episodes : 0
 
@@ -34,7 +34,7 @@ const addMovieToList = async (req, response, next) => {
         })
         .then((res) => {
             if (!res.includes(movieId.movieId)) {
-                const updateMovie = Movie.updateOne(
+                const updateMovie = Item.updateOne(
                     { _id: movieId.movieId },
                     { $push: { users: { user: uid.uid, status } } }
                 )
@@ -68,7 +68,7 @@ const addMovieToList = async (req, response, next) => {
                     }
                 )
 
-                const updateMovie = Movie.updateOne(
+                const updateMovie = Item.updateOne(
                     { _id: movieId.movieId, 'users.user': uid.uid },
                     {
                         $set: {
@@ -87,7 +87,7 @@ const addMovieToList = async (req, response, next) => {
         })
 }
 
-const updateWatchedEpisodes = async (req, res, next) => {
+const updateItemProgress = async (req, res, next) => {
     const { uid, movieId, status, episodes } = req.body
 
     try {
@@ -123,10 +123,10 @@ const updateRating = async (req, res, next) => {
     }
 }
 
-router.get('/all-movies', getAllMovies)
-router.get('/:movieId', getMovie)
-router.put('/add-movie', addMovieToList)
-router.put('/update-episodes', updateWatchedEpisodes)
+router.get('/all-movies', getAllItems)
+router.get('/:movieId', getItem)
+router.put('/add-movie', addItemToList)
+router.put('/update-episodes', updateItemProgress)
 router.put('/update-rating', updateRating)
 
 module.exports = router

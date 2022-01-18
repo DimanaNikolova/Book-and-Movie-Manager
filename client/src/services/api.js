@@ -5,8 +5,8 @@ export const getUser = (email) => `${url}/auth/get-user`
 export const registerUser = () => `${url}/auth/register-user`
 
 //movie related
-export const getMovie = (movieId) => `${url}/movies/${movieId}`
-export const getAllMovies = () => `${url}/movies/all-movies`
-export const addMovieToList = () => `${url}/movies/add-movie`
-export const updateWatchedEpisodes = (uid, movieId, status, episodes, title) => `${url}/movies/update-episodes`
-export const updateRating = (uid, movieId, rating) => `${url}/movies/update-rating`
+export const getItem = (movieId) => `${url}/items/${movieId}`
+export const getAllItems = () => `${url}/items/all-movies`
+export const addItemToList = () => `${url}/items/add-movie`
+export const updateItemProgress = (uid, movieId, status, episodes, title) => `${url}/items/update-episodes`
+export const updateRating = (uid, movieId, rating) => `${url}/items/update-rating`
