@@ -32,7 +32,7 @@ const TableItems = ({ items, status }) => {
                     return (
                         <tr key={m.title}>
                             <td>
-                                <Link to={'/item/' + m.movie}>{m.title}</Link>
+                                <Link to={'/item/' + m.item}>{m.title}</Link>
                             </td>
                             <td>{m.progress}</td>
                             <td>{m.rating ? m.rating : 'N/A'}</td>
