@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react'
-import { updateItemProgress } from '../../../services/movieService'
+import { updateItemProgress } from '../../../services/itemService'
 import { AuthContext } from '../../../contexts/AuthContext'
 
 const ItemProgress = ({ statusData, item, progressData }) => {

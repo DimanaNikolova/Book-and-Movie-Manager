@@ -9,7 +9,7 @@ const TableItems = ({ items, status }) => {
         items.map((m) => {
             return (
                 <tr key={m.title}>
-                    <td ><Link to={'/item/' + m.movie}>{m.title}</Link></td>
+                    <td ><Link to={'/item/' + m.item}>{m.title}</Link></td>
                     <td>{m.progress}</td>
                     <td>{m.rating ? m.rating : 'N/A'}</td>
                 </tr>

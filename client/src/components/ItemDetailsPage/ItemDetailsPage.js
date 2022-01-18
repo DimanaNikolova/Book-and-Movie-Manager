@@ -1,21 +1,21 @@
 import { useEffect, useContext, useState } from 'react'
-import { getItem } from '../../services/movieService'
+import { getItem } from '../../services/itemService'
 import { AuthContext } from '../../contexts/AuthContext'
-import CurrentItemBox from './CurrentItemBox/CurrentMovie'
+import CurrentItemBox from './CurrentItemBox/CurrentItemBox'
 import './ItemDetailsPage.scss'
 
 const ItemDetailsPage = (props) => {
-    const [movie, setMovie] = useState()
+    const [item, setItem] = useState()
     const [isLoading, setIsLoading] = useState(true)
     const [progressData, setProgressData] = useState({})
     const auth = useContext(AuthContext)
-    const movieId = props.match.params.id
+    const itemId = props.match.params.id
 
     useEffect(() => {
-        getItem(movieId).then((res) => {
-            setMovie(res)
-            auth.user.user.movies.map((m) => {
-                m.movie === movieId
+        getItem(itemId).then((res) => {
+            setItem(res)
+            auth.user.user.items.map((m) => {
+                m.item === itemId
                     ? setProgressData({
                           status: m.status,
                           episodes: m.progress,
@@ -28,17 +28,17 @@ const ItemDetailsPage = (props) => {
     }, [isLoading])
 
     return (
-        movie ? <div className='details-page-container frow'>
+        item ? <div className='details-page-container frow'>
             <div className='details fcol'>
                 <h3>Details</h3>
-                        <p><span>Title:</span> {movie.title}</p>
-                        <p><span>{movie.type == 'movie'? 'Episodes: ' : 'Pages: '}</span> {movie.episodes}</p>
-                        <p><span>Start date:</span> {movie.startDate}</p>
-                        <p><span>End date:</span> {movie.endDate}</p>
+                        <p><span>Title:</span> {item.title}</p>
+                        <p><span>{item.type == 'movie'? 'Episodes: ' : 'Pages: '}</span> {item.episodes}</p>
+                        <p><span>Start date:</span> {item.startDate}</p>
+                        <p><span>End date:</span> {item.endDate}</p>
 
             </div>
             <CurrentItemBox
-                item={movie}
+                item={item}
                 progressData={progressData}
             />
         </div> : null

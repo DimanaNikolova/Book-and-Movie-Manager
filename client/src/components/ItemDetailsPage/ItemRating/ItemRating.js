@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react'
-import { updateRating } from '../../../services/movieService'
+import { updateRating } from '../../../services/itemService'
 import { AuthContext } from '../../../contexts/AuthContext'
 
 const ItemRating = ({ statusData, itemId, progressData }) => {

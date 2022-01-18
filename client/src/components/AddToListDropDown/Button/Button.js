@@ -1,9 +1,9 @@
-const AddToListDropDown = ({ addMovie, action, bookStatus }) => {
+const AddToListDropDown = ({ addItem, action, bookStatus }) => {
     return (
         <button
             className='sign-button'
             onClick={() => {
-                addMovie(action)
+                addItem(action)
             }}
         >
             {bookStatus ? bookStatus : action}

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { getAllItems } from '../../services/movieService'
+import { getAllItems } from '../../services/itemService'
 import AddToListDropDown from '../AddToListDropDown/AddToListDropDown'
 import { useLocation } from 'react-router-dom'
 

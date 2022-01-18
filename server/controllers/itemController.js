@@ -6,10 +6,10 @@ const User = require('../model/User')
 const mongoose = require('mongoose')
 
 const getItem = async (req, res, next) => {
-    const { movieId } = req.params
+    const { itemId } = req.params
     try {
-        const movie = await Item.findOne({ _id: movieId })
-        res.status(200).json(movie)
+        const item = await Item.findOne({ _id: itemId })
+        res.status(200).json(item)
     } catch (err) {
         console.log(err)
     }
@@ -17,25 +17,25 @@ const getItem = async (req, res, next) => {
 
 const getAllItems = async (req, res, next) => {
     try {
-        const allMovies = await Item.find()
-        res.status(200).json(allMovies)
+        const allItems = await Item.find()
+        res.status(200).json(allItems)
     } catch (err) {
         console.log(err)
     }
 }
 
 const addItemToList = async (req, response, next) => {
-    const { uid, movieId, status, episodes, title, type } = req.body
+    const { uid, itemId, status, episodes, title, type } = req.body
     const progress = status == 'completed' ? episodes : 0
 
     User.findOne({ _id: uid.uid })
         .then((res) => {
-            return res.movies.map((m) => m.movie.toString())
+            return res.items.map((m) => m.item.toString())
         })
         .then((res) => {
-            if (!res.includes(movieId.movieId)) {
-                const updateMovie = Item.updateOne(
-                    { _id: movieId.movieId },
+            if (!res.includes(itemId.itemId)) {
+                const updateItem = Item.updateOne(
+                    { _id: itemId.itemId },
                     { $push: { users: { user: uid.uid, status } } }
                 )
 
@@ -43,8 +43,8 @@ const addItemToList = async (req, response, next) => {
                     { _id: uid.uid },
                     {
                         $push: {
-                            movies: {
-                                movie: movieId.movieId,
+                            items: {
+                                item: itemId.itemId,
                                 status,
                                 progress,
                                 title,
@@ -54,22 +54,22 @@ const addItemToList = async (req, response, next) => {
                     }
                 )
 
-                Promise.all([updateMovie, updateUser]).then((values) => {
+                Promise.all([updateItem, updateUser]).then((values) => {
                     response.status(200).json(values)
                 })
             } else {
                 const updateUser = User.updateOne(
-                    { _id: uid.uid, 'movies.movie': movieId.movieId },
+                    { _id: uid.uid, 'items.item': itemId.itemId },
                     {
                         $set: {
-                            'movies.$.status': status,
-                            'movies.$.progress': progress,
+                            'items.$.status': status,
+                            'items.$.progress': progress,
                         },
                     }
                 )
 
-                const updateMovie = Item.updateOne(
-                    { _id: movieId.movieId, 'users.user': uid.uid },
+                const updateItem = Item.updateOne(
+                    { _id: itemId.itemId, 'users.user': uid.uid },
                     {
                         $set: {
                             'users.$.status': status,
@@ -77,7 +77,7 @@ const addItemToList = async (req, response, next) => {
                         },
                     }
                 )
-                Promise.all([updateMovie, updateUser]).then((values) => {
+                Promise.all([updateItem, updateUser]).then((values) => {
                     response.status(200).json(values)
                 })
             }
@@ -88,14 +88,14 @@ const addItemToList = async (req, response, next) => {
 }
 
 const updateItemProgress = async (req, res, next) => {
-    const { uid, movieId, status, episodes } = req.body
+    const { uid, itemId, status, episodes } = req.body
 
     try {
         const updateUser = await User.updateOne(
-            { _id: uid, 'movies.movie': movieId },
+            { _id: uid, 'items.item': itemId },
             {
                 $set: {
-                    'movies.$.progress': episodes,
+                    'items.$.progress': episodes,
                 },
             }
         )
@@ -106,14 +106,14 @@ const updateItemProgress = async (req, res, next) => {
 }
 
 const updateRating = async (req, res, next) => {
-    const { uid, movieId, rating } = req.body
+    const { uid, itemId, rating } = req.body
 
     try {
         const updateUser = await User.updateOne(
-            { _id: uid, 'movies.movie': movieId },
+            { _id: uid, 'items.item': itemId },
             {
                 $set: {
-                    'movies.$.rating': rating,
+                    'items.$.rating': rating,
                 },
             }
         )
@@ -123,9 +123,9 @@ const updateRating = async (req, res, next) => {
     }
 }
 
-router.get('/all-movies', getAllItems)
-router.get('/:movieId', getItem)
-router.put('/add-movie', addItemToList)
+router.get('/all-items', getAllItems)
+router.get('/:itemId', getItem)
+router.put('/add-item', addItemToList)
 router.put('/update-episodes', updateItemProgress)
 router.put('/update-rating', updateRating)
 

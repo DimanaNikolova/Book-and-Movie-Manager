@@ -19,10 +19,10 @@ const userSchema = new mongoose.Schema({
         type: String,
     },
 
-    movies: [
+    items: [
         {
             _id: false,
-            movie: {
+            item: {
                 type: mongoose.Types.ObjectId,
                 ref: 'Item',
             },

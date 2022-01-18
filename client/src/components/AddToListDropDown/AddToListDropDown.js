@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from 'react'
-import { addItemToList } from '../../services/movieService'
+import { addItemToList } from '../../services/itemService'
 import { AuthContext } from '../../contexts/AuthContext'
 import Button from './Button/Button'
 
@@ -9,24 +9,24 @@ const AddToListDropDown = ({ item, passStatusData }) => {
     const auth = useContext(AuthContext)
 
     useEffect(() => {
-        auth.user.user.movies.map((m) => {
-            m.movie === item._id
+        auth.user.user.items.map((m) => {
+            m.item === item._id
                 ? passStatusData({
                       status: m.status,
                       watchedEpisodes: m.progress,
                   })
                 : null
-            m.movie === item._id ? setDisplayStatus(m.status) : null
-            m.movie === item._id && item.type == 'book' && m.status=='watching' ? setDisplayStatus('reading') : null
+            m.item === item._id ? setDisplayStatus(m.status) : null
+            m.item === item._id && item.type == 'book' && m.status=='watching' ? setDisplayStatus('reading') : null
         })
     }, [])
 
-    const addMovie = (status) => {
+    const addItem = (status) => {
         const uid = auth.user.user._id
-        const movieId = item._id
+        const itemId = item._id
         addItemToList(
             { uid },
-            { movieId },
+            { itemId },
             status,
             item.episodes,
             item.title,
@@ -49,12 +49,12 @@ const AddToListDropDown = ({ item, passStatusData }) => {
     const dropDown = displayDropDown ? (
         <>
             <Button
-                addMovie={addMovie}
+                addItem={addItem}
                 action={'watching'}
                 bookStatus={item.type == 'book' ? 'reading' : null}
             />
-            <Button addMovie={addMovie} action={'completed'} />
-            <Button addMovie={addMovie} action={'plan'} />
+            <Button addItem={addItem} action={'completed'} />
+            <Button addItem={addItem} action={'plan'} />
         </>
     ) : null
 

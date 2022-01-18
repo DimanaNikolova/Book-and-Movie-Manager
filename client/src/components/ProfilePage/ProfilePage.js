@@ -12,11 +12,11 @@ const ProfilePage = () => {
     useEffect(() => {
         if (location.pathname == '/profile/my-books') {
             setItems(
-                auth.user.user.movies.filter((item) => item.type == 'book')
+                auth.user.user.items.filter((item) => item.type == 'book')
             )
         } else if (location.pathname == '/profile/my-movies') {
             setItems(
-                auth.user.user.movies.filter((item) => item.type == 'movie')
+                auth.user.user.items.filter((item) => item.type == 'movie')
             )
         }
     }, [location])
