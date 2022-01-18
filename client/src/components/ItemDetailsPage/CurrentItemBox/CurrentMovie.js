@@ -4,7 +4,7 @@ import ItemRating from '../ItemRating/ItemRating'
 import ItemProgress from '../ItemProgress/ItemProgress'
 
 const CurrentItemBox = ({
-    movie,
+    item,
     progressData,
 }) => {
     const [statusData, setStatusData] = useState({
@@ -12,21 +12,21 @@ const CurrentItemBox = ({
         watchedEpisodes: 0,
     })
 
-    return statusData && movie ? (
-        <div className='current-movie'>
-            <h1>{movie.title}</h1>
+    return statusData && item ? (
+        <div className='current-item'>
+            <h1>{item.title}</h1>
             <div className='frow j-between'>
                 <div className='fcol a-cen'>
-                    <img src={movie.imgUrl} />
+                    <img src={item.imgUrl} />
                     <AddToListDropDown
-                        movie={movie}
+                        item={item}
                         passStatusData={setStatusData}
                     />
                 </div>
-                <div className='movie-summary fcol'>
-                    <ItemProgress statusData={statusData} movie={movie} progressData={progressData}/>
-                    <ItemRating statusData={statusData} movieId={movie._id} progressData={progressData}/>
-                    <p>{movie.synopsis}</p>
+                <div className='item-summary fcol'>
+                    <ItemProgress statusData={statusData} item={item} progressData={progressData}/>
+                    <ItemRating statusData={statusData} itemId={item._id} progressData={progressData}/>
+                    <p>{item.synopsis}</p>
                 </div>
             </div>
         </div>

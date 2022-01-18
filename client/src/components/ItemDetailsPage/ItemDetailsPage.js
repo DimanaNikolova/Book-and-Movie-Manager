@@ -38,7 +38,7 @@ const ItemDetailsPage = (props) => {
 
             </div>
             <CurrentItemBox
-                movie={movie}
+                item={movie}
                 progressData={progressData}
             />
         </div> : null

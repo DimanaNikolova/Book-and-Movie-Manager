@@ -24,17 +24,17 @@ const CatalogPage = () => {
             })
     }, [])
 
-    const loadMovies = item
+    const loadItems = item
         ? item.map((i) => {
               return (
                   <div
-                      className='current-movie fcol a-cen j-around'
+                      className='current-item fcol a-cen j-around'
                       key={i.title}
                   >
                       <img src={i.imgUrl} />
                       <Link to={`/item/${i._id}`}>{i.title}</Link>
                       <AddToListDropDown
-                          movie={i}
+                          item={i}
                           passStatusData={setStatusData}
                       />
                   </div>
@@ -43,13 +43,13 @@ const CatalogPage = () => {
         : null
 
     return (
-        <div className='movie-catalog-wrapper fcol a-cen'>
+        <div className='item-catalog-wrapper fcol a-cen'>
             {location.pathname == '/book-catalog' ? (
                 <h1>Book catalog</h1>
             ) : (
                 <h1>Movie catalog</h1>
             )}
-            <div className='movies-container frow j-around'>{loadMovies}</div>
+            <div className='items-container frow j-around'>{loadItems}</div>
         </div>
     )
 }

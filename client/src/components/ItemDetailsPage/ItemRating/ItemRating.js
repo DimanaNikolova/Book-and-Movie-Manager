@@ -2,14 +2,14 @@ import { useState, useContext } from 'react'
 import { updateRating } from '../../../services/movieService'
 import { AuthContext } from '../../../contexts/AuthContext'
 
-const ItemRating = ({ statusData, movieId, progressData }) => {
+const ItemRating = ({ statusData, itemId, progressData }) => {
     const [updatedRating, setUpdatedRating] = useState(statusData.rating)
     const auth = useContext(AuthContext)
     const uid = auth.user.user._id
 
     const ratingChangeHandler = (e) => {
         setUpdatedRating(e.target.value)
-        updateRating(uid, movieId, e.target.value)
+        updateRating(uid, itemId, e.target.value)
     }
 
     const ratingHeading = (

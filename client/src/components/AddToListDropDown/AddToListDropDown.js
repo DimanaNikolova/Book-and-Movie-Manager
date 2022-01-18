@@ -3,34 +3,34 @@ import { addMovieToList } from '../../services/movieService'
 import { AuthContext } from '../../contexts/AuthContext'
 import Button from './Button/Button'
 
-const AddToListDropDown = ({ movie, passStatusData }) => {
+const AddToListDropDown = ({ item, passStatusData }) => {
     const [displayDropDown, setDisplayDropdown] = useState(false)
     const [displayStatus, setDisplayStatus] = useState('Add to list')
     const auth = useContext(AuthContext)
 
     useEffect(() => {
         auth.user.user.movies.map((m) => {
-            m.movie === movie._id
+            m.movie === item._id
                 ? passStatusData({
                       status: m.status,
                       watchedEpisodes: m.progress,
                   })
                 : null
-            m.movie === movie._id ? setDisplayStatus(m.status) : null
-            m.movie === movie._id && movie.type == 'book' && m.status=='watching' ? setDisplayStatus('reading') : null
+            m.movie === item._id ? setDisplayStatus(m.status) : null
+            m.movie === item._id && item.type == 'book' && m.status=='watching' ? setDisplayStatus('reading') : null
         })
     }, [])
 
     const addMovie = (status) => {
         const uid = auth.user.user._id
-        const movieId = movie._id
+        const movieId = item._id
         addMovieToList(
             { uid },
             { movieId },
             status,
-            movie.episodes,
-            movie.title,
-            movie.type
+            item.episodes,
+            item.title,
+            item.type
         )
             .then((res) => {
                 setDisplayDropdown(!displayDropDown)
@@ -38,7 +38,7 @@ const AddToListDropDown = ({ movie, passStatusData }) => {
                 status == 'completed'
                     ? passStatusData({
                           status,
-                          watchedEpisodes: movie.episodes,
+                          watchedEpisodes: item.episodes,
                       })
                     : passStatusData({ status, watchedEpisodes: 0 })
                 auth.refreshUserData()
@@ -51,7 +51,7 @@ const AddToListDropDown = ({ movie, passStatusData }) => {
             <Button
                 addMovie={addMovie}
                 action={'watching'}
-                bookStatus={movie.type == 'book' ? 'reading' : null}
+                bookStatus={item.type == 'book' ? 'reading' : null}
             />
             <Button addMovie={addMovie} action={'completed'} />
             <Button addMovie={addMovie} action={'plan'} />

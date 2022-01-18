@@ -2,14 +2,14 @@ import { useState, useContext } from 'react'
 import { updateWatchedEpisodes } from '../../../services/movieService'
 import { AuthContext } from '../../../contexts/AuthContext'
 
-const ItemProgress = ({ statusData, movie, progressData }) => {
+const ItemProgress = ({ statusData, item, progressData }) => {
     const [updatedEpisodes, setUpdatedEpisodes] = useState(statusData.episodes)
     const auth = useContext(AuthContext)
     const uid = auth.user.user._id
 
     const progressChangeHandler = (e) => {
         setUpdatedEpisodes(e.target.value)
-        updateWatchedEpisodes(uid, movie._id, statusData.status, e.target.value)
+        updateWatchedEpisodes(uid, item._id, statusData.status, e.target.value)
     }
 
     const progressHeading = (
@@ -19,16 +19,16 @@ const ItemProgress = ({ statusData, movie, progressData }) => {
                 type='number'
                 value={updatedEpisodes || progressData.episodes}
                 min={0}
-                max={movie.episodes}
+                max={item.episodes}
                 onChange={progressChangeHandler}
-            />/{movie.episodes}
+            />/{item.episodes}
         </h4>
     )
 
     return  statusData.status == 'watching'
         ? progressHeading
         :         <h4>
-        My Progress: {statusData.watchedEpisodes}/{movie.episodes}
+        My Progress: {statusData.watchedEpisodes}/{item.episodes}
     </h4>
 }
 
