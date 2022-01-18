@@ -1,32 +1,44 @@
-import { Link } from "react-router-dom"
-import { useEffect } from "react"
+import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+
 const TableItems = ({ items, status }) => {
+    const [data, setData] = useState([])
+    const [sortType, setSortType] = useState('name')
 
-    useEffect(()=>{
+    useEffect(() => {
+        setData(items)
+    }, [items])
 
-    },[items])
-    const loadItems = items ? (
-        items.map((m) => {
-            return (
-                <tr key={m.title}>
-                    <td ><Link to={'/item/' + m.movie}>{m.title}</Link></td>
-                    <td>{m.progress}</td>
-                    <td>{m.rating ? m.rating : 'N/A'}</td>
-                </tr>
-            )
-        })
-    ) : (
-        <tr>N/A</tr>
-    )
+    useEffect(() => {
+        const sortArray = (type) => {
+            type == 'title'
+                ? setData([...items].sort((a, b) => a.title.localeCompare(b.title)))
+                : setData([...items].sort((a, b) => b[type] - a[type]))
+        }
+        sortArray(sortType)
+    }, [sortType])
 
     return (
         <>
             <h3>{status}</h3>
             <table>
-                <th className="td-title">Name</th>
-                <th>Progress</th>
-                <th>Rating</th>
-                {loadItems}
+                <th className='td-title' onClick={(e) => setSortType('title')}>
+                    Name
+                </th>
+                <th onClick={(e) => setSortType('progress')}>Progress</th>
+                <th onClick={(e) => setSortType('rating')}>Rating</th>
+
+                {data.map((m) => {
+                    return (
+                        <tr key={m.title}>
+                            <td>
+                                <Link to={'/item/' + m.movie}>{m.title}</Link>
+                            </td>
+                            <td>{m.progress}</td>
+                            <td>{m.rating ? m.rating : 'N/A'}</td>
+                        </tr>
+                    )
+                })}
             </table>
         </>
     )
