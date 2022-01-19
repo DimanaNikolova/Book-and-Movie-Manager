@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from 'react'
 import { addItemToList } from '../../services/itemService'
 import { AuthContext } from '../../contexts/AuthContext'
+import * as toaster from '../../utils/toaster'
 import Button from './Button/Button'
 
 const AddToListDropDown = ({ item, passStatusData }) => {
@@ -33,6 +34,7 @@ const AddToListDropDown = ({ item, passStatusData }) => {
             item.type
         )
             .then((res) => {
+                toaster.toastInfo(`Added ${item.title} to your ${status} list`)
                 setDisplayDropdown(!displayDropDown)
                 setDisplayStatus(status)
                 status == 'completed'

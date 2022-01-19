@@ -12,7 +12,9 @@ const TableItems = ({ items, status }) => {
     useEffect(() => {
         const sortArray = (type) => {
             type == 'title'
-                ? setData([...items].sort((a, b) => a.title.localeCompare(b.title)))
+                ? setData(
+                      [...items].sort((a, b) => a.title.localeCompare(b.title))
+                  )
                 : setData([...items].sort((a, b) => b[type] - a[type]))
         }
         sortArray(sortType)
@@ -22,21 +24,34 @@ const TableItems = ({ items, status }) => {
         <>
             <h3>{status}</h3>
             <table>
-                <th className='td-title' onClick={(e) => setSortType('title')}>
-                    Name
-                </th>
-                <th onClick={(e) => setSortType('progress')}>Progress</th>
-                <th onClick={(e) => setSortType('rating')}>Rating</th>
+                <thead>
+                    <tr>
+                        <th
+                            className='td-title'
+                            onClick={(e) => setSortType('title')}
+                        >
+                            Name
+                        </th>
+                        <th onClick={(e) => setSortType('progress')}>
+                            Progress
+                        </th>
+                        <th onClick={(e) => setSortType('rating')}>Rating</th>
+                    </tr>
+                </thead>
 
                 {data.map((m) => {
                     return (
-                        <tr key={m.title}>
-                            <td>
-                                <Link to={'/item/' + m.item}>{m.title}</Link>
-                            </td>
-                            <td>{m.progress}</td>
-                            <td>{m.rating ? m.rating : 'N/A'}</td>
-                        </tr>
+                        <tbody key={m.title}>
+                            <tr>
+                                <td>
+                                    <Link to={'/item/' + m.item}>
+                                        {m.title}
+                                    </Link>
+                                </td>
+                                <td>{m.progress}</td>
+                                <td>{m.rating ? m.rating : 'N/A'}</td>
+                            </tr>
+                        </tbody>
                     )
                 })}
             </table>

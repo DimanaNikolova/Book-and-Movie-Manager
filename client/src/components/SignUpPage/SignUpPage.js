@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { registerUser } from '../../services/userService'
+import * as toaster from '../../utils/toaster'
 import './SignUpPage.scss'
 
 const SignUpPage = () => {
@@ -12,9 +13,11 @@ const SignUpPage = () => {
         e.preventDefault()
         registerUser(email, password)
             .then((res) => {
-                    history.push('/')
+                toaster.toastInfo('You have signed up successfully!')
+                history.push('/')
             })
             .catch((e) => {
+                toaster.toastError('Something went wrong!')
                 console.log(e)
             })
     }

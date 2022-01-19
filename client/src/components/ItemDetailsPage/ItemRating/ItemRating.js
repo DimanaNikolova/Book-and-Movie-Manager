@@ -10,6 +10,7 @@ const ItemRating = ({ statusData, itemId, progressData }) => {
     const ratingChangeHandler = (e) => {
         setUpdatedRating(e.target.value)
         updateRating(uid, itemId, e.target.value)
+        auth.refreshUserData()
     }
 
     const ratingHeading = (

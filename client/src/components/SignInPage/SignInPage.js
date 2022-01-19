@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import { useHistory  } from 'react-router-dom'
 import firebase from '../../config/firebase'
+import * as toaster from '../../utils/toaster'
 import './SignUpPage.scss'
 
 const SignInPage = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const history = useHistory()
+    
     const onSubmitHandler = (e) => {
         e.preventDefault()
         firebase
@@ -15,9 +17,11 @@ const SignInPage = () => {
                 password
             )
             .then((userCredential) => {
+                toaster.toastInfo('You have signed in!')
                 history.push('/')
             })
             .catch((error) => {
+                toaster.toastError('Wrong email or password!')
                 console.log(error)
             })
     }

@@ -36,9 +36,6 @@ const ProfilePage = () => {
                     <span>
                         <Link to='/profile/my-books'>My Books</Link>
                     </span>
-                    <span>
-                        <Link>My Comics</Link>
-                    </span>
                 </div>
                 <div className='current-items'>
                     <TableItems items={items} />

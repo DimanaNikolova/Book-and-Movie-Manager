@@ -10,6 +10,7 @@ const ItemProgress = ({ statusData, item, progressData }) => {
     const progressChangeHandler = (e) => {
         setUpdatedEpisodes(e.target.value)
         updateItemProgress(uid, item._id, statusData.status, e.target.value)
+        auth.refreshUserData()
     }
 
     const progressHeading = (
