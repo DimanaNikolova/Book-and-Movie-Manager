@@ -23,8 +23,8 @@ function App() {
                 <AuthContextProvider>
                 <PageContainer>
                     <Route exact path='/' component={authGuard(HomePage, UserHomePage)} />
-                    <Route path='/sign-up' component={SignUpPage} />
-                    <Route path='/sign-in' component={SignInPage} />
+                    <Route path='/sign-up' component={authGuard(SignUpPage, UserHomePage)} />
+                    <Route path='/sign-in' component={authGuard(SignInPage, UserHomePage)} />
                     <PrivateRoute path='/movie-catalog' component={CatalogPage} />
                     <PrivateRoute path='/book-catalog' component={CatalogPage} />
                     <PrivateRoute path='/item/:id' component={ItemDetailsPage} />
