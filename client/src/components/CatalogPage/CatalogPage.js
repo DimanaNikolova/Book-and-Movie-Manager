@@ -7,25 +7,29 @@ import { useLocation } from 'react-router-dom'
 import './CatalogPage.scss'
 
 const CatalogPage = () => {
-    const [item, setItems] = useState([])
+    const [items, setItems] = useState([])
+    const [search, setSearch] = useState('')
     const [statusData, setStatusData] = useState()
 
     const location = useLocation()
 
     useEffect(() => {
-        getAllItems()
+        if(search == ''){
+            getAllItems()
             .then((data) => {
                 location.pathname == '/book-catalog'
                     ? setItems(data.filter((item) => item.type == 'book'))
                     : setItems(data.filter((item) => item.type == 'movie'))
+                
             })
             .catch((e) => {
                 console.log(e)
             })
-    }, [])
+        }
+    }, [search])
 
-    const loadItems = item
-        ? item.map((i) => {
+    const loadItems = items
+        ? items.map((i) => {
               return (
                   <div
                       className='current-item fcol a-cen j-around'
@@ -42,6 +46,11 @@ const CatalogPage = () => {
           })
         : null
 
+    const searchHandler = (e) => {
+        setSearch(e.target.value)
+        setItems(items.filter(item=> item.title.toLowerCase().includes(e.target.value)))
+    }
+
     return (
         <div className='item-catalog-wrapper fcol a-cen'>
             {location.pathname == '/book-catalog' ? (
@@ -49,6 +58,15 @@ const CatalogPage = () => {
             ) : (
                 <h1>Movie catalog</h1>
             )}
+            <input
+                className='search-bar'
+                type='text'
+                value={search}
+                onChange={(e) => {
+                    searchHandler(e)
+                }}
+                placeholder='Search'
+            />
             <div className='items-container frow j-around'>{loadItems}</div>
         </div>
     )

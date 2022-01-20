@@ -2,7 +2,7 @@
     margin: 0px auto;
     width: 80%;
     h1{
-        margin: 30px 0px;
+        margin: 40px 0px;
     }
     .items-container {
         justify-content: space-between;
@@ -14,6 +14,7 @@
             border: 1px solid white;
             height: 550px;
             margin-bottom: 70px;
+            text-align: center;
             img {
                 max-width: 200px;
             }
@@ -27,4 +28,18 @@
             }
         }
     }
+    .search-bar{
+        background-color: rgba(255, 255, 255, 0.2);
+        height: 20px;
+        width: 200px;
+        color: white;
+        padding: 10px;
+        border: 1px solid white;
+        margin-bottom: 50px;
+        font-size: 12px;
+    }
+    ::placeholder { 
+        color: white;
+        
+      }
 }

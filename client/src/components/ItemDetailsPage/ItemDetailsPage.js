@@ -33,8 +33,8 @@ const ItemDetailsPage = (props) => {
                 <h3>Details</h3>
                         <p><span>Title:</span> {item.title}</p>
                         <p><span>{item.type == 'movie'? 'Episodes: ' : 'Pages: '}</span> {item.episodes}</p>
-                        <p><span>Start date:</span> {item.startDate}</p>
-                        <p><span>End date:</span> {item.endDate}</p>
+                        <p><span>First released:</span> {item.startDate}</p>
+                        {item.type == 'movie' ? <p><span>Last released:</span> {item.endDate}</p> : null}
 
             </div>
             <CurrentItemBox
