@@ -13,10 +13,6 @@ const UserHomePage = () => {
                     <img src='https://www.book.store.bg/lrgimg/281288/kym-nebeto.jpg' />
                     Book Catalog
                 </Link>
-                {/* <Link to='/' className='catalog-link'>
-                    <img src='https://images-na.ssl-images-amazon.com/images/I/91D07epNE9L.jpg' />
-                    Comic and Manga Catalog
-                </Link> */}
             </div>
         </>
     )
